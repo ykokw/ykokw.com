@@ -27,6 +27,7 @@ const title="Yuki Okawa (@ykokw)"
     <h1>{title}</h1>
     <div class="content">
       <p class="introduction">
+        <img src="/images/profile.jpg" alt="Yuki Okawaのプロフィール画像" />
         Hi, I am Yuki Okawa.<br />
         日本でフロントエンドエンジニアとして働いています。
       </p>
@@ -67,7 +68,7 @@ const title="Yuki Okawa (@ykokw)"
           ))
         }
       </ul>
-      <h2>Values</h2>
+      <h2>Mottos</h2>
       <ul class="values">
         <li>There is more than one way to do it.</li>
         <li>ねだるな、勝ち取れ、さすれば与えられん</li>
@@ -167,5 +168,16 @@ const title="Yuki Okawa (@ykokw)"
   }
   p {
     word-break: auto-phrase;
+  }
+  .introduction {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 8px;
+  }
+  .introduction img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
   }
 </style>
