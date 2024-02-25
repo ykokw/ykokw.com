@@ -1,5 +1,4 @@
 ---
-import "@fontsource-variable/noto-sans-jp";
 interface Props {
   title: string;
 }
@@ -32,7 +31,12 @@ const { title } = Astro.props;
 </html>
 <style is:global>
   html {
-    font-family: "Noto Sans JP Variable", sans-serif;
+    font-family: "Helvetica Neue",
+    Arial,
+    "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans",
+    Meiryo,
+    sans-serif;
     height: 100vh;
     height: 100dvh;
     transition: background-color 0.5s;
