@@ -1,4 +1,6 @@
 ---
+import bizUDGothicLatin from "@fontsource/biz-udgothic/files/biz-udgothic-latin-400-normal.woff2";
+import "@fontsource/biz-udgothic/400.css";
 interface Props {
   title: string;
 }
@@ -9,6 +11,13 @@ const { title } = Astro.props;
 <!doctype html>
 <html lang="ja">
   <head prefix="og: https://ogp.me/ns/website#">
+    <link
+      rel="preload"
+      href={bizUDGothicLatin}
+      as="font"
+      type="font/woff2"
+      crossorigin="anonymous"
+    />
     <meta charset="UTF-8" />
     <meta name="description" content="Yuki Okawa's Home page" />
     <meta name="viewport" content="width=device-width" />
@@ -31,12 +40,7 @@ const { title } = Astro.props;
 </html>
 <style is:global>
   html {
-    font-family: "Helvetica Neue",
-    Arial,
-    "Hiragino Kaku Gothic ProN",
-    "Hiragino Sans",
-    Meiryo,
-    sans-serif;
+    font-family: "Verdana", "BIZ UDGothic", system-ui;
     height: 100vh;
     height: 100dvh;
     transition: background-color 0.5s;
