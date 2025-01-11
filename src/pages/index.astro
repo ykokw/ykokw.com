@@ -9,14 +9,19 @@ const profileLinks = [
 
 const snsLinks = [
   { label: "Bluesky", href: "https://bsky.app/profile/ykokw.com" },
-  { label: "X(Twitter)", href: "https://twitter.com/ykokw" },
-  { label: "Threads", href: "https://www.threads.net/@ykokw" },
 ];
 
 const blogLinks = [
   { label: "Zenn", href: "https://zenn.dev/ykokw" },
   { label: "Qiita", href: "https://qiita.com/ykokw" },
   { label: "しずかなインターネット", href: "https://sizu.me/ykokw" },
+];
+
+const articles = [
+  {
+    label: "PlaywrightとMSWを組み合わせる - Timee Product Team Blog",
+    href: "https://tech.timee.co.jp/entry/2024/12/21/000000",
+  },
 ];
 
 const title = "Yuki Okawa (@ykokw)";
@@ -28,8 +33,8 @@ const title = "Yuki Okawa (@ykokw)";
     <div class="content">
       <p class="introduction">
         <img src="/images/profile.jpg" alt="Yuki Okawaのプロフィール画像" />
-         Hi, I am Yuki Okawa.<br />
-         日本でフロントエンドエンジニアとして働いています。
+        Hi, I am Yuki Okawa.<br />
+        日本でフロントエンドエンジニアとして働いています。
       </p>
 
       <h2>Links</h2>
@@ -68,6 +73,16 @@ const title = "Yuki Okawa (@ykokw)";
           ))
         }
       </ul>
+      <h3>Articles</h3>
+      <ul class="articles">
+        {
+          articles.map((params) => (
+            <li>
+              <TextLink {...params} />
+            </li>
+          ))
+        }
+      </ul>
       <h2>Mottos</h2>
       <ul class="values">
         <li>There is more than one way to do it.</li>
@@ -89,12 +104,14 @@ const title = "Yuki Okawa (@ykokw)";
   }
   @media (prefers-color-scheme: dark) {
     main {
-      color: #D9D9D9;
-      background: #2D2D2D;
+      color: #d9d9d9;
+      background: #2d2d2d;
     }
   }
   main {
-    transition: background-color 0.5s ease, color 0.5s ease;
+    transition:
+      background-color 0.5s ease,
+      color 0.5s ease;
     flex-grow: 1;
     flex-shrink: 0;
     margin: 48px auto;
@@ -141,7 +158,8 @@ const title = "Yuki Okawa (@ykokw)";
     font-weight: 400;
     line-height: normal;
   }
-  ul.links {
+  ul.links,
+  ul.articles {
     display: flex;
     list-style: none;
     margin: 0;
