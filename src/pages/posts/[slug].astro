@@ -3,9 +3,7 @@ import Layout from "../../layouts/Layout.astro";
 
 export async function getStaticPaths() {
   // 今後実装予定：実際のブログ記事データから動的パスを生成
-  return [
-    { params: { slug: "sample-post" } },
-  ];
+  return [{ params: { slug: "sample-post" } }];
 }
 
 const { slug } = Astro.params;
