@@ -1,7 +1,8 @@
 ---
-import bizUDGothicLatin from "@fontsource/biz-udgothic/files/biz-udgothic-latin-400-normal.woff2";
+import "@fontsource/biz-udgothic/files/biz-udgothic-latin-400-normal.woff2";
 import "@fontsource/biz-udgothic/400.css";
 import "../styles/global.css";
+import Header from "../components/Header.astro";
 interface Props {
   title: string;
 }
@@ -10,15 +11,8 @@ const { title } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="ja">
+<html lang="ja" class="h-screen h-dvh font-sans bg-midnight">
   <head prefix="og: https://ogp.me/ns/website#">
-    <link
-      rel="preload"
-      href={bizUDGothicLatin}
-      as="font"
-      type="font/woff2"
-      crossorigin="anonymous"
-    />
     <meta charset="UTF-8" />
     <meta name="description" content="Yuki Okawa's Home page" />
     <meta name="viewport" content="width=device-width" />
@@ -33,58 +27,8 @@ const { title } = Astro.props;
       content={new URL("/images/ogp-dark.png", Astro.site)}
     />
   </head>
-  <body>
-    <div class="wrapper">
-      <slot />
-    </div>
+  <body class="m-0 flex flex-col h-full overflow-y-auto max-w-4xl mx-auto">
+    <Header />
+    <slot />
   </body>
 </html>
-<style is:global>
-  html {
-    font-family: "Verdana", "BIZ UDGothic", system-ui;
-    height: 100vh;
-    height: 100dvh;
-    transition: background-color 0.5s;
-  }
-  @media (prefers-color-scheme: light) {
-    body {
-      background: var(
-        --bg-light,
-        linear-gradient(
-          180deg,
-          #4f87c8 2.13%,
-          #9abade 47.58%,
-          #f1cb92 85.44%,
-          #ffb97a 95.89%,
-          #ff8d08 100%
-        )
-      );
-    }
-  }
-  @media (prefers-color-scheme: dark) {
-    body {
-      background: var(
-        --bg--dark,
-        linear-gradient(
-          180deg,
-          #141517 13.64%,
-          #464a61 59.53%,
-          #696f73 79.11%,
-          #a99b8c 94.05%,
-          #ff933e 100%
-        )
-      );
-    }
-  }
-  body {
-    margin: 0;
-    display: flex;
-    height: 100%;
-    overflow-y: auto;
-  }
-  .wrapper {
-    width: 100%;
-    height: 100%;
-    overflow-y: auto;
-  }
-</style>
