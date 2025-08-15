@@ -5,9 +5,30 @@ import PageLayout from "../layouts/PageLayout.astro";
 import { getCollection } from "astro:content";
 
 const allBlogPosts = await getCollection("blog");
-const posts = allBlogPosts.sort(
-  (a, b) => Date.parse(b.data.publishedDate) - Date.parse(a.data.publishedDate),
-);
+const posts = [...allBlogPosts]
+  .sort(
+    (a, b) =>
+      Date.parse(b.data.publishedDate) - Date.parse(a.data.publishedDate),
+  )
+  .filter((_, index) => index < 5);
+
+// タグの使用回数を集計
+const tagCounts = allBlogPosts.reduce((acc, post) => {
+  if (post.data.tags) {
+    post.data.tags.forEach((tag) => {
+      acc.set(
+        tag,
+        Math.trunc(((acc.get(tag) || 0) + 1) / allBlogPosts.length) * 100,
+      );
+    });
+  }
+  return acc;
+}, new Map<string, number>());
+
+// 使用回数でソートしてトップ5を取得
+const topTags = Array.from(tagCounts.entries())
+  .sort((a, b) => b[1] - a[1])
+  .slice(0, 5);
 ---
 
 <PageLayout>
@@ -26,5 +47,28 @@ const posts = allBlogPosts.sort(
         ))
       }
     </ul>
+    <p class="text-blue-white mt-4 text-sm">
+      <TextLink label="View all posts..." href="/blog" />
+    </p>
+  </section>
+  <section class="my-8">
+    <h2 class="text-blue-white mb-2 text-2xl">Recently used tags</h2>
+    <ul class="list-inside list-disc">
+      {
+        topTags.map(([tag, count]) => (
+          <li class="text-md text-blue-white mb-1">
+            {tag}: {count}%
+          </li>
+        ))
+      }
+    </ul>
+    {
+      topTags.length === 0 && (
+        <p class="text-blue-white text-sm">No tags found.</p>
+      )
+    }
+    <p class="text-blue-white mt-4 text-sm">
+      <TextLink label="View all tags..." href="/tags" />
+    </p>
   </section>
 </PageLayout>
