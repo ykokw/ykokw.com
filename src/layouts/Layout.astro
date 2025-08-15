@@ -14,7 +14,7 @@ const title = `Yuki Okawa (@ykokw)${breadcrumbsText}`;
 ---
 
 <!doctype html>
-<html lang="ja" class="h-screen h-dvh font-sans bg-midnight">
+<html lang="ja" class="bg-midnight h-dvh h-screen font-sans">
   <head prefix="og: https://ogp.me/ns/website#">
     <meta charset="UTF-8" />
     <meta name="description" content="Yuki Okawa's Home page" />
@@ -30,7 +30,7 @@ const title = `Yuki Okawa (@ykokw)${breadcrumbsText}`;
       content={new URL("/images/ogp-dark.png", Astro.site)}
     />
   </head>
-  <body class="px-2 flex flex-col h-full overflow-y-auto max-w-4xl mx-auto">
+  <body class="mx-auto flex h-full max-w-4xl flex-col overflow-y-auto px-2">
     <Header />
     <main>
       <slot />

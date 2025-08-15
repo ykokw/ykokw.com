@@ -1,8 +1,8 @@
 ---
-title: 'サイトリニューアル2025'
-tags: ['Astro', 'Github Copilot', 'Figma', 'Chat GPT']
-publishedDate: '2025-08-14'
-lastEditedDate: '2025-08-14'
+title: "サイトリニューアル2025"
+tags: ["Astro", "Github Copilot", "Figma", "Chat GPT"]
+publishedDate: "2025-08-14"
+lastEditedDate: "2025-08-14"
 published: false
 ---
 
@@ -29,7 +29,7 @@ published: false
 
 ```ts
 const blog = defineCollection({
-  loader: glob({ pattern: '**/*.md', base: './blog' }),
+  loader: glob({ pattern: "**/*.md", base: "./blog" }),
   schema: z.object({
     title: z.string(),
     tags: z.array(z.string()).optional(),
@@ -43,4 +43,3 @@ const blog = defineCollection({
 Zenn用
 
 その他記事用
-

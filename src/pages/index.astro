@@ -5,18 +5,18 @@ import { getCollection } from "astro:content";
 
 const allBlogPosts = await getCollection("blog");
 const posts = allBlogPosts.sort(
-  (a, b) => Date.parse(b.data.publishedDate) - Date.parse(a.data.publishedDate)
+  (a, b) => Date.parse(b.data.publishedDate) - Date.parse(a.data.publishedDate),
 );
 ---
 
 <Layout>
   <section class="my-8">
-    <h2 class="text-2xl text-blue-white mb-2">Recent blog posts</h2>
+    <h2 class="text-blue-white mb-2 text-2xl">Recent blog posts</h2>
     <ul>
       {
         posts.map((post) => (
-          <li class="text-md text-blue-white flex flex-col mb-2">
-            <span class="text-sm text-light-blue">
+          <li class="text-md text-blue-white mb-2 flex flex-col">
+            <span class="text-light-blue text-sm">
               {post.data.publishedDate}
             </span>
             <TextLink label={post.data.title} href={`/blog/${post.id}`} />
