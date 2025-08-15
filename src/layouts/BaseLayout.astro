@@ -20,6 +20,14 @@ const title = `Yuki Okawa (@ykokw)${breadcrumbsText}`;
     <meta name="description" content="Yuki Okawa's Home page" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+      rel="stylesheet"
+    />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta property="og:title" content={title} />
@@ -32,9 +40,7 @@ const title = `Yuki Okawa (@ykokw)${breadcrumbsText}`;
   </head>
   <body class="mx-auto flex h-full max-w-4xl flex-col overflow-y-auto px-2">
     <Header />
-    <main>
-      <slot />
-    </main>
+    <slot />
     <Footer />
   </body>
 </html>

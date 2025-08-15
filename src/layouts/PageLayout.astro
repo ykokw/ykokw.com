@@ -1,0 +1,19 @@
+---
+import "@fontsource/biz-udgothic/files/biz-udgothic-latin-400-normal.woff2";
+import "@fontsource/biz-udgothic/400.css";
+import "../styles/global.css";
+import BaseLayout from "./BaseLayout.astro";
+interface Props {
+  breadcrumbs?: string[];
+}
+
+const { breadcrumbs = [] } = Astro.props;
+const breadcrumbsText = breadcrumbs.join(" / ");
+const title = `Yuki Okawa (@ykokw)${breadcrumbsText}`;
+---
+
+<BaseLayout>
+  <main>
+    <slot />
+  </main>
+</BaseLayout>

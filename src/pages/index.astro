@@ -1,6 +1,7 @@
 ---
+import BlogInfo from "../components/BlogInfo.astro";
 import TextLink from "../components/TextLink.astro";
-import Layout from "../layouts/Layout.astro";
+import PageLayout from "../layouts/PageLayout.astro";
 import { getCollection } from "astro:content";
 
 const allBlogPosts = await getCollection("blog");
@@ -9,23 +10,21 @@ const posts = allBlogPosts.sort(
 );
 ---
 
-<Layout>
+<PageLayout>
   <section class="my-8">
     <h2 class="text-blue-white mb-2 text-2xl">Recent blog posts</h2>
     <ul>
       {
         posts.map((post) => (
           <li class="text-md text-blue-white mb-2 flex flex-col">
-            <span class="text-light-blue text-sm">
-              {post.data.publishedDate}
-            </span>
             <TextLink label={post.data.title} href={`/blog/${post.id}`} />
-            <span class="text-sm">
-              {post.data.tags?.map((tag) => `#${tag}`).join(", ")}
-            </span>
+            <BlogInfo
+              publishedDate={post.data.publishedDate}
+              tags={post.data.tags}
+            />
           </li>
         ))
       }
     </ul>
   </section>
-</Layout>
+</PageLayout>
