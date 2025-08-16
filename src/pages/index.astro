@@ -6,6 +6,14 @@ import { getCollection } from "astro:content";
 
 const allBlogPosts = await getCollection("blog");
 const articlesCollection = await getCollection("articles");
+const zennCollection = await getCollection("zenn");
+const zennItems = zennCollection.map((item) => ({
+  title: item.data.title as string,
+  publishedDate: (item.data.published as Date).toISOString().split("T")[0],
+  tags: [],
+  url: item.data.id as string,
+  media: "Zenn" as const,
+}));
 
 // ブログポストを統一フォーマットに変換
 const blogItems = allBlogPosts.map((post) => ({
@@ -25,9 +33,15 @@ const articleItems = articlesCollection.map((article) => ({
   media: article.data.media,
 }));
 
-// 全アイテムを結合して日付順にソート
-const allItems = [...blogItems, ...articleItems];
+// 全アイテムを結合して2年以内のものにフィルタし日付順にソート
+const allItems = [...blogItems, ...articleItems, ...zennItems];
 const sortedItems = allItems
+  .filter((item) => {
+    const publishedDate = new Date(item.publishedDate);
+    return (
+      publishedDate >= new Date(Date.now() - 365 * 2 * 24 * 60 * 60 * 1000)
+    );
+  })
   .sort((a, b) => Date.parse(b.publishedDate) - Date.parse(a.publishedDate))
   .slice(0, 5);
 
@@ -37,7 +51,10 @@ const tagPercentage = [...blogItems, ...articleItems].reduce((acc, item) => {
     item.tags.map((tag: string) => {
       acc.set(
         tag,
-        Math.trunc((((acc.get(tag) || 0) + 1) / allItems.length) * 100),
+        Math.trunc(
+          (((acc.get(tag) || 0) + 1) / [...blogItems, ...articleItems].length) *
+            100,
+        ),
       );
     });
   }
@@ -57,7 +74,7 @@ const topTags = Array.from(tagPercentage.entries())
       {
         sortedItems.map((item) => (
           <li class="text-md text-blue-white mb-2 flex flex-col">
-            <div class="flex items-center gap-2">
+            <div class="flex flex-wrap items-center gap-x-2">
               <TextLink
                 label={item.title}
                 href={item.url}
@@ -78,6 +95,7 @@ const topTags = Array.from(tagPercentage.entries())
   </section>
   <section class="my-8">
     <h2 class="text-blue-white mb-2 text-2xl">Recently used tags</h2>
+    <p class="text-blue-white text-sm opacity-70">（Zennの記事は集計対象外）</p>
     <ul class="list-inside list-disc">
       {
         topTags.map(([tag, percent]) => (

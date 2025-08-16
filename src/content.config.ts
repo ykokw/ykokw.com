@@ -1,5 +1,6 @@
 import { defineCollection, z } from "astro:content";
 import { glob, file } from "astro/loaders";
+import { feedLoader } from "@ascorbic/feed-loader";
 
 const blog = defineCollection({
   loader: glob({ pattern: "**/*.md", base: "./blog" }),
@@ -23,7 +24,14 @@ const articles = defineCollection({
   }),
 });
 
+const zenn = defineCollection({
+  loader: feedLoader({
+    url: "https://zenn.dev/ykokw/feed",
+  })
+});
+
 export const collections = {
   blog,
   articles,
+  zenn,
 };

@@ -11,6 +11,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@ascorbic/feed-loader": "^2.0.1",
     "@astrojs/check": "^0.9.4",
     "@fontsource/biz-udgothic": "^5.1.0",
     "@tailwindcss/vite": "^4.1.11",

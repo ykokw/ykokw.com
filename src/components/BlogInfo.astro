@@ -13,10 +13,14 @@ const { publishedDate, tags } = Astro.props;
     </span>
     {publishedDate}
   </span>
-  <span class="flex items-center gap-0.5 text-sm" aria-label="tags:">
-    <span class="material-symbols-outlined text-base!" aria-hidden="true">
-      tag
-    </span>
-    {tags?.map((tag) => `${tag}`).join(", ")}
-  </span>
+  {
+    tags && tags.length > 0 && (
+      <span class="flex items-center gap-0.5 text-sm" aria-label="tags:">
+        <span class="material-symbols-outlined text-base!" aria-hidden="true">
+          tag
+        </span>
+        {tags?.map((tag) => `${tag}`).join(", ")}
+      </span>
+    )
+  }
 </div>
