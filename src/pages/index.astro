@@ -5,20 +5,39 @@ import PageLayout from "../layouts/PageLayout.astro";
 import { getCollection } from "astro:content";
 
 const allBlogPosts = await getCollection("blog");
-const posts = [...allBlogPosts]
-  .sort(
-    (a, b) =>
-      Date.parse(b.data.publishedDate) - Date.parse(a.data.publishedDate),
-  )
-  .filter((_, index) => index < 5);
+const articlesCollection = await getCollection("articles");
 
-// タグの使用回数を集計
-const tagCounts = allBlogPosts.reduce((acc, post) => {
-  if (post.data.tags) {
-    post.data.tags.forEach((tag) => {
+// ブログポストを統一フォーマットに変換
+const blogItems = allBlogPosts.map((post) => ({
+  title: post.data.title,
+  publishedDate: post.data.publishedDate,
+  tags: post.data.tags || [],
+  url: `/blog/${post.id}`,
+  media: "blog" as const,
+}));
+
+// 記事を統一フォーマットに変換
+const articleItems = articlesCollection.map((article) => ({
+  title: article.data.title,
+  publishedDate: article.data.publishedDate,
+  tags: article.data.tags || [],
+  url: article.data.url,
+  media: article.data.media,
+}));
+
+// 全アイテムを結合して日付順にソート
+const allItems = [...blogItems, ...articleItems];
+const sortedItems = allItems
+  .sort((a, b) => Date.parse(b.publishedDate) - Date.parse(a.publishedDate))
+  .slice(0, 5);
+
+// タグの使用回数を集計（ブログポストと記事の両方から）
+const tagPercentage = [...blogItems, ...articleItems].reduce((acc, item) => {
+  if (item.tags) {
+    item.tags.map((tag: string) => {
       acc.set(
         tag,
-        Math.trunc(((acc.get(tag) || 0) + 1) / allBlogPosts.length) * 100,
+        Math.trunc((((acc.get(tag) || 0) + 1) / allItems.length) * 100),
       );
     });
   }
@@ -26,23 +45,29 @@ const tagCounts = allBlogPosts.reduce((acc, post) => {
 }, new Map<string, number>());
 
 // 使用回数でソートしてトップ5を取得
-const topTags = Array.from(tagCounts.entries())
+const topTags = Array.from(tagPercentage.entries())
   .sort((a, b) => b[1] - a[1])
-  .slice(0, 5);
+  .slice(0, 5) as [string, number][];
 ---
 
 <PageLayout>
   <section class="my-8">
-    <h2 class="text-blue-white mb-2 text-2xl">Recent blog posts</h2>
+    <h2 class="text-blue-white mb-2 text-2xl">Recent posts</h2>
     <ul>
       {
-        posts.map((post) => (
+        sortedItems.map((item) => (
           <li class="text-md text-blue-white mb-2 flex flex-col">
-            <TextLink label={post.data.title} href={`/blog/${post.id}`} />
-            <BlogInfo
-              publishedDate={post.data.publishedDate}
-              tags={post.data.tags}
-            />
+            <div class="flex items-center gap-2">
+              <TextLink
+                label={item.title}
+                href={item.url}
+                target={item.media !== "blog" ? "_blank" : undefined}
+              />
+              {item.media !== "blog" && (
+                <span class="text-sm opacity-70">({(item as any).media})</span>
+              )}
+            </div>
+            <BlogInfo publishedDate={item.publishedDate} tags={item.tags} />
           </li>
         ))
       }
@@ -55,9 +80,9 @@ const topTags = Array.from(tagCounts.entries())
     <h2 class="text-blue-white mb-2 text-2xl">Recently used tags</h2>
     <ul class="list-inside list-disc">
       {
-        topTags.map(([tag, count]) => (
+        topTags.map(([tag, percent]) => (
           <li class="text-md text-blue-white mb-1">
-            {tag}: {count}%
+            {tag}: {percent} %
           </li>
         ))
       }

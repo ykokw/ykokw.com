@@ -9,11 +9,24 @@ interface Props {
 const { href, label, target, rel } = Astro.props;
 ---
 
-<a
-  href={href}
-  target={target}
-  rel={rel}
-  class="text-blue-white hover:text-light-blue underline transition-colors duration-500 ease-in-out"
+<span
+  class="text-blue-white hover:text-light-blue flex gap-1 transition-colors duration-500 ease-in-out"
 >
-  {label}
-</a>
+  <a
+    href={href}
+    target={target}
+    rel={rel}
+    class="flex items-center gap-0.5 underline"
+  >
+    {label}
+  </a>
+  {
+    typeof target !== "undefined" && (
+      <span class="flex items-center gap-0.5" aria-label="open link in new tab">
+        <span class="material-symbols-outlined text-base!" aria-hidden="true">
+          open_in_new
+        </span>
+      </span>
+    )
+  }
+</span>
