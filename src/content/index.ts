@@ -71,29 +71,31 @@ export const getLatestItems = async (): Promise<CommonArticle[]> => {
     .slice(0, 5);
 };
 
-export const getTagPercentage = async () => {
+export const getAllTagUsages = async () => {
   const blogItems = await getAllBlogPosts();
   const articleItems = await getAllExternalArticles();
-  return [...blogItems, ...articleItems].reduce((acc, item) => {
+  const tagUsages = [...blogItems, ...articleItems].reduce((acc, item) => {
     if (item.tags) {
       item.tags.map((tag: string) => {
-        acc.set(
-          tag,
-          Math.trunc(
-            (((acc.get(tag) || 0) + 1) /
-              [...blogItems, ...articleItems].length) *
-              100,
-          ),
-        );
+        acc.set(tag, (acc.get(tag) || 0) + 1);
       });
     }
     return acc;
   }, new Map<string, number>());
+
+  return new Map(
+    [...tagUsages.entries()].sort(([a], [b]) => a.localeCompare(b)),
+  );
 };
 
 export const getTopTags = async () => {
-  const tagPercentage = await getTagPercentage();
-  return Array.from(tagPercentage.entries())
+  const tagUsage = await getAllTagUsages();
+  const sortedTags = Array.from(tagUsage.entries())
     .sort((a, b) => b[1] - a[1])
     .slice(0, 5) as [string, number][];
+  const allItemsLength = (await getAllItems()).length;
+  return sortedTags.map(([tag, count]) => [
+    tag,
+    Math.trunc((count / allItemsLength) * 100),
+  ]);
 };

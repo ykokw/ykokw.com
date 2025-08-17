@@ -1,0 +1,25 @@
+---
+import TextLink from "../../components/TextLink.astro";
+import { getAllTagUsages } from "../../content/index.ts";
+import PageLayout from "../../layouts/PageLayout.astro";
+
+const allTags = await getAllTagUsages();
+---
+
+<PageLayout>
+  <section class="my-8">
+    <h2 class="text-blue-white mb-2 text-2xl">All tags</h2>
+    <ul class="list-inside list-disc">
+      {
+        Array.from(allTags.entries()).map(([tag, usage]) => (
+          <li class="text-md text-blue-white mb-1">
+            <TextLink
+              label={`${tag} (${usage})`}
+              href={`/tags/${encodeURIComponent(tag)}`}
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</PageLayout>
