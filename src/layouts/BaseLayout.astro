@@ -10,7 +10,7 @@ interface Props {
 
 const { breadcrumbs = [] } = Astro.props;
 const breadcrumbsText = breadcrumbs.join(" / ");
-const title = `Yuki Okawa (@ykokw)${breadcrumbsText}`;
+const title = `Yuki Okawa (@ykokw) | ${breadcrumbsText}`;
 ---
 
 <!doctype html>
@@ -39,7 +39,7 @@ const title = `Yuki Okawa (@ykokw)${breadcrumbsText}`;
     />
   </head>
   <body class="mx-auto flex h-full max-w-4xl flex-col overflow-y-auto px-2">
-    <Header />
+    <Header breadcrumbString={breadcrumbsText} />
     <slot />
     <Footer />
   </body>

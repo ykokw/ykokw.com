@@ -1,36 +1,22 @@
 ---
-import Layout from "../layouts/PageLayout.astro";
+import { Image } from "astro:assets";
+import PageLayout from "../layouts/PageLayout.astro";
 
-const title = "About | Yuki Okawa (@ykokw)";
+const intro = `はじめまして！日本でフロントエンドエンジニアをしているYuki Okawa（@ykokw）です。
+私はReact、Next.jsを中心にUIの開発・運用を行っています。
+Vitest、Playwrightでの自動テスト整備・CI/CD環境整備にも取り組んでいます。
+`;
 ---
 
-<Layout title={title}>
-  <main>
-    <h1>About</h1>
-    <div class="content">
-      <p>自己紹介ページ</p>
-    </div>
-  </main>
-</Layout>
-
-<style>
-  main {
-    margin: auto;
-    padding: 1rem;
-    width: 800px;
-    max-width: calc(100% - 2rem);
-    color: white;
-    font-size: 20px;
-    line-height: 1.6;
-  }
-  .content {
-    margin-top: 2rem;
-  }
-  h1 {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    margin-bottom: 1em;
-  }
-</style>
+<PageLayout breadcrumbs={["About me"]}>
+  <section class="my-8 flex items-center gap-4">
+    <Image
+      src="/images/profile.jpg"
+      alt="Yuki Okawa's profile picture"
+      width={80}
+      height={80}
+      class="rounded-full"
+    />
+    <p class="text-blue-white text-sm whitespace-pre-wrap">{intro}</p>
+  </section>
+</PageLayout>

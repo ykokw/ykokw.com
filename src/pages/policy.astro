@@ -1,36 +1,12 @@
 ---
-import Layout from "../layouts/PageLayout.astro";
-
-const title = "Policy | Yuki Okawa (@ykokw)";
+import PageLayout from "../layouts/PageLayout.astro";
 ---
 
-<Layout title={title}>
+<PageLayout breadcrumbs={["サイトポリシー・プライバシーポリシー"]}>
   <main>
     <h1>Policy</h1>
     <div class="content">
       <p>ポリシーページ</p>
     </div>
   </main>
-</Layout>
-
-<style>
-  main {
-    margin: auto;
-    padding: 1rem;
-    width: 800px;
-    max-width: calc(100% - 2rem);
-    color: white;
-    font-size: 20px;
-    line-height: 1.6;
-  }
-  .content {
-    margin-top: 2rem;
-  }
-  h1 {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    margin-bottom: 1em;
-  }
-</style>
+</PageLayout>

@@ -6,7 +6,7 @@ import ItemList from "../../components/ItemList.astro";
 const allItems = await getAllItems();
 ---
 
-<PageLayout>
+<PageLayout breadcrumbs={["blog"]}>
   <section class="my-8">
     <h2 class="text-blue-white mb-2 text-2xl">All posts</h2>
     <ItemList items={allItems} />

@@ -12,7 +12,7 @@ const breadcrumbsText = breadcrumbs.join(" / ");
 const title = `Yuki Okawa (@ykokw)${breadcrumbsText}`;
 ---
 
-<BaseLayout>
+<BaseLayout breadcrumbs={breadcrumbs}>
   <article
     class:list={[
       "prose text-blue-white mb-8 max-w-full text-sm",
