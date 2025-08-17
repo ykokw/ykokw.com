@@ -20,7 +20,7 @@ const filteredItems = allItems.filter((item) =>
 );
 ---
 
-<PageLayout breadcrumbs={["tags", `#${decodedSlug}`]}>
+<PageLayout breadcrumbs={[{ label: "tags", href: "/tags" }, `#${decodedSlug}`]}>
   <section class="my-8">
     <h2 class="text-blue-white mb-2 text-2xl">"#{slug}" posts</h2>
     <ItemList items={filteredItems} />

@@ -4,7 +4,7 @@ import "@fontsource/biz-udgothic/400.css";
 import "../styles/global.css";
 import BaseLayout from "./BaseLayout.astro";
 interface Props {
-  breadcrumbs?: string[];
+  breadcrumbs?: (string | { label: string; href: string })[];
 }
 
 const { breadcrumbs = [] } = Astro.props;

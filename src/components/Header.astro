@@ -1,10 +1,5 @@
 ---
 import TextLink from "./TextLink.astro";
-
-interface Props {
-  breadcrumbString: string;
-}
-const { breadcrumbString = "" } = Astro.props;
 ---
 
 <header class="text-blue-white flex w-full items-center justify-between py-4">
@@ -13,8 +8,3 @@ const { breadcrumbString = "" } = Astro.props;
   </h1>
   <TextLink label="About me" href="/about" />
 </header>
-{
-  breadcrumbString.length > 0 && (
-    <p class="text-light-blue w-full">/ {breadcrumbString}</p>
-  )
-}

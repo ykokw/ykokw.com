@@ -4,8 +4,9 @@ import "@fontsource/biz-udgothic/400.css";
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import BreadcrumbNavigation from "../components/BreadcrumbNavigation.astro";
 interface Props {
-  breadcrumbs?: string[];
+  breadcrumbs?: (string | { label: string; href: string })[];
 }
 
 const { breadcrumbs = [] } = Astro.props;
@@ -38,8 +39,11 @@ const title = `Yuki Okawa (@ykokw) | ${breadcrumbsText}`;
       content={new URL("/images/ogp-dark.png", Astro.site)}
     />
   </head>
-  <body class="mx-auto flex h-full max-w-4xl flex-col overflow-y-auto px-2">
-    <Header breadcrumbString={breadcrumbsText} />
+  <body
+    class="mx-auto flex h-full w-4xl max-w-4xl flex-col overflow-y-auto px-2"
+  >
+    <Header breadcrumbs={breadcrumbs} />
+    <BreadcrumbNavigation breadcrumbs={breadcrumbs} />
     <slot />
     <Footer />
   </body>

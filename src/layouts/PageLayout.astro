@@ -4,14 +4,14 @@ import "@fontsource/biz-udgothic/400.css";
 import "../styles/global.css";
 import BaseLayout from "./BaseLayout.astro";
 interface Props {
-  breadcrumbs?: string[];
+  breadcrumbs?: (string | { label: string; href: string })[];
 }
 
 const { breadcrumbs = [] } = Astro.props;
 ---
 
 <BaseLayout breadcrumbs={breadcrumbs}>
-  <main>
+  <main class="mb-8 max-w-full">
     <slot />
   </main>
 </BaseLayout>
