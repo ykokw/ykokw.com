@@ -1,12 +1,57 @@
 ---
 import PageLayout from "../layouts/PageLayout.astro";
+import TextLink from "../components/TextLink.astro";
+
+const sitePolicy = `
+このサイトは、運営者が学んだことを記録しておくための個人的なブログです。
+所属している会社や団体とは一切関係ありません。
+
+内容はあくまで個人の学習メモであり、正確さや最新性を保証するものではありません。
+記事の内容を参考にする場合は、すべて自己責任でお願いします。
+参考にしたことで何か不利益やトラブルが発生しても、運営者は責任を負いません。`;
+
+const privacyPolicy1 = `
+(アクセス解析について)
+このサイトでは、アクセス状況を把握するために Cloudflare Analytics を利用しています。
+収集されるデータは匿名化されており、個人を特定できる情報は含まれていません。
+Cloudflare Web Analyticsの詳細については以下のドキュメントもご覧ください。`;
+const privacyPolicy2 = `
+(個人情報について)
+通常、このサイトでは訪問者の個人情報を収集することはありません。`;
 ---
 
 <PageLayout breadcrumbs={["サイトポリシー・プライバシーポリシー"]}>
-  <main>
-    <h1>Policy</h1>
-    <div class="content">
-      <p>ポリシーページ</p>
-    </div>
-  </main>
+  <section class="py-8">
+    <h2 class="text-blue-white mb-2 text-2xl">サイトポリシー</h2>
+    <p class="text-blue-white text-sm whitespace-pre-wrap">
+      {sitePolicy}
+    </p>
+  </section>
+  <section class="py-8">
+    <h2 class="text-blue-white mb-2 text-2xl">プライバシーポリシー</h2>
+    <p class="text-blue-white text-sm whitespace-pre">
+      {privacyPolicy1}
+      <ul class="text-sm">
+        <li>
+          <TextLink
+            label="Cloudflare Web Analytics | About"
+            href="https://developers.cloudflare.com/web-analytics/about/"
+            target="_blank"
+            rel="noopener noreferrer"
+          />
+        </li>
+        <li>
+          <TextLink
+            label="RUM beacon for Web Analytics"
+            href="https://developers.cloudflare.com/speed/speed-test/rum-beacon/"
+            target="_blank"
+            rel="noopener noreferrer"
+          />
+        </li>
+      </ul>
+      <p class="text-blue-white text-sm whitespace-pre-wrap">
+        {privacyPolicy2}
+      </p>
+    </p>
+  </section>
 </PageLayout>
