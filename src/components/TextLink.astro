@@ -13,13 +13,19 @@ const { href, label, target, rel } = Astro.props;
   href={href}
   target={target}
   rel={rel}
-  class="text-blue-white hover:text-light-blue flex items-center gap-x-0.5 transition-colors duration-500 ease-in-out"
+  class="text-blue-white hover:text-light-blue ansition-colors duration-500 ease-in-out"
 >
-  <span class="underline">{label}</span>
+  <span class="underline underline-offset-4">{label}</span>
   {
     typeof target !== "undefined" && (
-      <span class="flex items-center gap-0.5" aria-label="open link in new tab">
-        <span class="material-symbols-outlined text-base!" aria-hidden="true">
+      <span
+        aria-label="open link in new tab"
+        class="text-blue-white opacity-70"
+      >
+        <span
+          class="material-symbols-outlined inline-flex align-middle text-base!"
+          aria-hidden="true"
+        >
           open_in_new
         </span>
       </span>
