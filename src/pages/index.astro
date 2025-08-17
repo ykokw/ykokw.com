@@ -2,93 +2,17 @@
 import BlogInfo from "../components/BlogInfo.astro";
 import TextLink from "../components/TextLink.astro";
 import PageLayout from "../layouts/PageLayout.astro";
-import { getCollection } from "astro:content";
+import { getLatestItems, getTopTags } from "../content/index.ts";
+import ItemList from "../components/ItemList.astro";
 
-const allBlogPosts = await getCollection("blog");
-const articlesCollection = await getCollection("articles");
-const zennCollection = await getCollection("zenn");
-const zennItems = zennCollection.map((item) => ({
-  title: item.data.title as string,
-  publishedDate: (item.data.published as Date).toISOString().split("T")[0],
-  tags: [],
-  url: item.data.id as string,
-  media: "Zenn" as const,
-}));
-
-// ブログポストを統一フォーマットに変換
-const blogItems = allBlogPosts.map((post) => ({
-  title: post.data.title,
-  publishedDate: post.data.publishedDate,
-  tags: post.data.tags || [],
-  url: `/blog/${post.id}`,
-  media: "blog" as const,
-}));
-
-// 記事を統一フォーマットに変換
-const articleItems = articlesCollection.map((article) => ({
-  title: article.data.title,
-  publishedDate: article.data.publishedDate,
-  tags: article.data.tags || [],
-  url: article.data.url,
-  media: article.data.media,
-}));
-
-// 全アイテムを結合して2年以内のものにフィルタし日付順にソート
-const allItems = [...blogItems, ...articleItems, ...zennItems];
-const sortedItems = allItems
-  .filter((item) => {
-    const publishedDate = new Date(item.publishedDate);
-    return (
-      publishedDate >= new Date(Date.now() - 365 * 2 * 24 * 60 * 60 * 1000)
-    );
-  })
-  .sort((a, b) => Date.parse(b.publishedDate) - Date.parse(a.publishedDate))
-  .slice(0, 5);
-
-// タグの使用回数を集計（ブログポストと記事の両方から）
-const tagPercentage = [...blogItems, ...articleItems].reduce((acc, item) => {
-  if (item.tags) {
-    item.tags.map((tag: string) => {
-      acc.set(
-        tag,
-        Math.trunc(
-          (((acc.get(tag) || 0) + 1) / [...blogItems, ...articleItems].length) *
-            100,
-        ),
-      );
-    });
-  }
-  return acc;
-}, new Map<string, number>());
-
-// 使用回数でソートしてトップ5を取得
-const topTags = Array.from(tagPercentage.entries())
-  .sort((a, b) => b[1] - a[1])
-  .slice(0, 5) as [string, number][];
+const latestItems = await getLatestItems();
+const topTags = await getTopTags();
 ---
 
 <PageLayout>
   <section class="my-8">
     <h2 class="text-blue-white mb-2 text-2xl">Recent posts</h2>
-    <ul>
-      {
-        sortedItems.map((item) => (
-          <li class="text-md text-blue-white mb-2 flex flex-col">
-            <div class="flex flex-wrap items-center gap-x-2">
-              <TextLink
-                label={item.title}
-                href={item.url}
-                target={item.media !== "blog" ? "_blank" : undefined}
-              />
-              {item.media !== "blog" && (
-                <span class="text-sm opacity-70">({(item as any).media})</span>
-              )}
-            </div>
-            <BlogInfo publishedDate={item.publishedDate} tags={item.tags} />
-          </li>
-        ))
-      }
-    </ul>
+    <ItemList items={latestItems} />
     <p class="text-blue-white mt-4 text-sm">
       <TextLink label="View all posts..." href="/blog" />
     </p>

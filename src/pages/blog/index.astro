@@ -1,36 +1,14 @@
 ---
-import Layout from "../../layouts/PageLayout.astro";
+import PageLayout from "../../layouts/PageLayout.astro";
+import { getAllItems } from "../../content/index.ts";
+import ItemList from "../../components/ItemList.astro";
 
-const title = "Posts | Yuki Okawa (@ykokw)";
+const allItems = await getAllItems();
 ---
 
-<Layout title={title}>
-  <main>
-    <h1>Posts</h1>
-    <div class="content">
-      <p>ブログ記事一覧ページ</p>
-    </div>
-  </main>
-</Layout>
-
-<style>
-  main {
-    margin: auto;
-    padding: 1rem;
-    width: 800px;
-    max-width: calc(100% - 2rem);
-    color: white;
-    font-size: 20px;
-    line-height: 1.6;
-  }
-  .content {
-    margin-top: 2rem;
-  }
-  h1 {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1;
-    text-align: center;
-    margin-bottom: 1em;
-  }
-</style>
+<PageLayout>
+  <section class="my-8">
+    <h2 class="text-blue-white mb-2 text-2xl">All posts</h2>
+    <ItemList items={allItems} />
+  </section>
+</PageLayout>
