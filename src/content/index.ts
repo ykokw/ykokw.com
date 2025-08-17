@@ -93,7 +93,9 @@ export const getTopTags = async () => {
   const sortedTags = Array.from(tagUsage.entries())
     .sort((a, b) => b[1] - a[1])
     .slice(0, 5) as [string, number][];
-  const allItemsLength = (await getAllItems()).length;
+  const blogItems = await getAllBlogPosts();
+  const articleItems = await getAllExternalArticles();
+  const allItemsLength = [...blogItems, ...articleItems].length;
   return sortedTags.map(([tag, count]) => [
     tag,
     Math.trunc((count / allItemsLength) * 100),
