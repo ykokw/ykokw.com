@@ -38,6 +38,12 @@ const title = `Yuki Okawa (@ykokw) | ${breadcrumbsText}`;
       property="og:image"
       content={new URL("/images/ogp-dark.png", Astro.site)}
     />
+    <!-- Cloudflare Web Analytics -->
+    <script
+      defer
+      src="https://static.cloudflareinsights.com/beacon.min.js"
+      data-cf-beacon='{"token": "b11fcb98029c4cb7ab6b6a68ed234690"}'
+    ></script><!-- End Cloudflare Web Analytics -->
   </head>
   <body
     class="mx-auto flex h-full w-4xl max-w-4xl flex-col overflow-y-auto px-2"
