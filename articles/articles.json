@@ -3,7 +3,7 @@
     "title": "PlaywrightとMSWを組み合わせる",
     "url": "https://tech.timee.co.jp/entry/2024/12/21/000000",
     "publishedDate": "2024-12-21",
-    "tags": ["Playwright", "msw"],
+    "tags": ["Playwright", "Mock Service Worker"],
     "media": "Timee Product Team Blog"
   }
 }
