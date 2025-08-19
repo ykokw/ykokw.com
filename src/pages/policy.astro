@@ -13,13 +13,14 @@ const sitePolicy = `
 参考にしたことで不利益やトラブルが発生しても、運営者は責任を負いません。
 
 
-(著作権について)
-掲載している文章や画像などにつきましては、無断転載することを禁止します。
-
-
 （リンクについて）
 当ブログは基本的にリンクフリーです。リンクを行う場合の許可や連絡は不要です。
-ただし、iframeでの埋め込みや、画像の直接リンクはご遠慮ください。`;
+ただし、iframeでの埋め込みや、画像の直接リンクはご遠慮ください。
+
+
+（ソースコードについて）
+このサイトのソースコードは、GitHub上で公開しています。
+以下のリンクからご覧いただけます。`;
 
 const privacyPolicy1 = `
 (アクセス解析について)
@@ -29,7 +30,7 @@ Cloudflare Web Analyticsの詳細については以下のドキュメントも�
 const privacyPolicy2 = `
 
 (個人情報について)
-通常、このサイトでは訪問者の個人情報を収集することはありません。`;
+このサイトでは訪問者の個人情報を収集することはありません。`;
 ---
 
 <PageLayout breadcrumbs={["サイトポリシー・プライバシーポリシー"]}>
@@ -37,6 +38,14 @@ const privacyPolicy2 = `
     <h2 class="text-blue-white mb-2 text-2xl">サイトポリシー</h2>
     <p class="text-blue-white text-sm whitespace-pre-wrap">
       {sitePolicy}
+    </p>
+    <p class="text-blue-white text-sm">
+      <TextLink
+        label="ソースコード"
+        href="https://github.com/ykokw/ykokw.com"
+        target="_blank"
+        rel="noopener noreferrer"
+      />
     </p>
   </section>
   <section class="py-8">
