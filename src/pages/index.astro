@@ -1,5 +1,4 @@
 ---
-import BlogInfo from "../components/BlogInfo.astro";
 import TextLink from "../components/TextLink.astro";
 import PageLayout from "../layouts/PageLayout.astro";
 import { getLatestItems, getTopTags } from "../content/index.ts";
@@ -11,14 +10,14 @@ const topTags = await getTopTags();
 
 <PageLayout>
   <section class="my-8">
-    <h2 class="text-blue-white mb-2 text-2xl">Recent posts</h2>
+    <h2 class="text-blue-white mb-2 text-2xl">最近の記事</h2>
     <ItemList items={latestItems} />
     <p class="text-blue-white mt-4 text-sm">
-      <TextLink label="View all posts..." href="/blog" />
+      <TextLink label="すべての記事を見る" href="/articles" />
     </p>
   </section>
   <section class="my-8">
-    <h2 class="text-blue-white mb-2 text-2xl">Recently used tags</h2>
+    <h2 class="text-blue-white mb-2 text-2xl">記事のタグ割合</h2>
     <p class="text-blue-white text-sm opacity-70">（Zennの記事は集計対象外）</p>
     <ul class="list-inside list-disc">
       {
@@ -31,11 +30,11 @@ const topTags = await getTopTags();
     </ul>
     {
       topTags.length === 0 && (
-        <p class="text-blue-white text-sm">No tags found.</p>
+        <p class="text-blue-white text-sm">タグがありません</p>
       )
     }
     <p class="text-blue-white mt-4 text-sm">
-      <TextLink label="View all tags..." href="/tags" />
+      <TextLink label="すべてのタグを見る" href="/tags" />
     </p>
   </section>
 </PageLayout>

@@ -6,9 +6,9 @@ import PageLayout from "../../layouts/PageLayout.astro";
 const allTags = await getAllTagUsages();
 ---
 
-<PageLayout breadcrumbs={["tags"]}>
+<PageLayout breadcrumbs={["すべてのタグ一覧"]}>
   <section class="my-8">
-    <h2 class="text-blue-white mb-2 text-2xl">All tags</h2>
+    <h2 class="text-blue-white mb-2 text-2xl">すべてのタグ一覧</h2>
     <ul class="list-inside list-disc">
       {
         Array.from(allTags.entries()).map(([tag, usage]) => (
