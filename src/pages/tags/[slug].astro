@@ -2,7 +2,6 @@
 import PageLayout from "../../layouts/PageLayout.astro";
 import { getAllItems, getAllTagUsages } from "../../content/index.ts";
 import ItemList from "../../components/ItemList.astro";
-import { getCollection } from "astro:content";
 
 export async function getStaticPaths() {
   const tagUsages = await getAllTagUsages();
