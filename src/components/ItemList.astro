@@ -19,7 +19,6 @@ const { items } = Astro.props;
             label={item.title}
             href={item.url}
             target={item.media !== "blog" ? "_blank" : undefined}
-            rel={item.media !== "blog" ? "noopener noreferrer" : undefined}
           />
           {item.media !== "blog" && (
             <span class="text-sm opacity-70">({(item as any).media})</span>
