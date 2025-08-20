@@ -14,7 +14,9 @@ let allZennPosts: CollectionEntry<"zenn">[] = [];
 
 export async function getAllBlogPosts(): Promise<CommonArticle[]> {
   if (allBlogPosts.length === 0) {
-    allBlogPosts = await getCollection("blog");
+    allBlogPosts = await getCollection("blog", (item) => {
+      return import.meta.env.MODE === "production" ? item.data.published : true;
+    });
   }
   return allBlogPosts.map((post) => ({
     title: post.data.title,
