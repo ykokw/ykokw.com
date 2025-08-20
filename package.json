@@ -16,6 +16,7 @@
     "@fontsource/biz-udgothic": "^5.1.0",
     "@tailwindcss/vite": "^4.1.11",
     "astro": "^5.12.9",
+    "rehype-external-links": "^3.0.0",
     "tailwindcss": "^4.1.11",
     "typescript": "^5.3.3"
   },
