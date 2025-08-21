@@ -8,8 +8,6 @@ interface Props {
 }
 
 const { breadcrumbs = [] } = Astro.props;
-const breadcrumbsText = breadcrumbs.join(" / ");
-const title = `Yuki Okawa (@ykokw)${breadcrumbsText}`;
 ---
 
 <BaseLayout breadcrumbs={breadcrumbs}>

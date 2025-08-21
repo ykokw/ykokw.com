@@ -10,8 +10,10 @@ interface Props {
 }
 
 const { breadcrumbs = [] } = Astro.props;
-const breadcrumbsText = breadcrumbs.join(" / ");
-const title = `Yuki Okawa (@ykokw) | ${breadcrumbsText}`;
+const breadcrumbsText = breadcrumbs
+  .map((crumb) => (typeof crumb === "string" ? crumb : crumb.label))
+  .join(" / ");
+const title = `Yuki Okawa (@ykokw) | ${breadcrumbsText.length > 0 ? breadcrumbsText : "Home"}`;
 ---
 
 <!doctype html>

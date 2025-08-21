@@ -5,8 +5,6 @@ import "../styles/global.css";
 import BaseLayout from "./BaseLayout.astro";
 
 const { frontmatter } = Astro.props;
-const breadcrumbsText = frontmatter.breadcrumbs.join(" / ");
-const title = `Yuki Okawa (@ykokw)${breadcrumbsText}`;
 ---
 
 <BaseLayout breadcrumbs={frontmatter.breadcrumbs}>
