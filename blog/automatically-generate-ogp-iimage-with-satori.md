@@ -102,6 +102,7 @@ export default defineConfig({
 ## 参考リンク
 
 - [vercel/satori: Enlightened library to convert HTML and CSS to SVG](https://github.com/vercel/satori "vercel/satori: Enlightened library to convert HTML and CSS to SVG")
+- [エンドポイント | Docs](https://docs.astro.build/ja/guides/endpoints/ "エンドポイント | Docs")
 - [Astro + SatoriでブログのOGP画像を自動生成した - @kimulaco/blog](https://blog.kimulaco.dev/article/ogp-img-with-astro-and-satori "Astro + SatoriでブログのOGP画像を自動生成した - @kimulaco/blog")
 - [satoriを使ったAstroのOGP画像生成メモ | lacolaco's marginalia](https://blog.lacolaco.net/posts/astro-satori-og-image-generation/ "satoriを使ったAstroのOGP画像生成メモ | lacolaco's marginalia")
 - [AstroでNo loader is configured for &quot;.node&quot; files: node_modules/.pnpm/@resvg+resvg-js-linux-x64-gnu@2.6.2/node_modules/@resvg/resvg-js-linux-x64-gnu/resvgjs.linux-x64-gnu.node エラーを解決する](https://tomoyayoshida.com/blog/astro-no-loader/ 'AstroでNo loader is configured for ".node" files: node_modules/.pnpm/@resvg+resvg-js-linux-x64-gnu@2.6.2/node_modules/@resvg/resvg-js-linux-x64-gnu/resvgjs.linux-x64-gnu.node エラーを解決する')
