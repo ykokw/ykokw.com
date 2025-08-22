@@ -14,7 +14,10 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 ---
 
-<BlogLayout breadcrumbs={[{ label: "ブログ", href: "/blog" }, post.data.title]}>
+<BlogLayout
+  breadcrumbs={[{ label: "ブログ", href: "/blog" }, post.data.title]}
+  id={post.id}
+>
   <h1>{post.data.title}</h1>
   <BlogInfo publishedDate={post.data.publishedDate} tags={post.data.tags} />
   <Content />

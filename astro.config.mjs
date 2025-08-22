@@ -3,12 +3,17 @@ import rehypeExternalLinks from "rehype-external-links";
 
 import tailwindcss from "@tailwindcss/vite";
 
+import react from "@astrojs/react";
+
 // https://astro.build/config
 export default defineConfig({
   site: "https://ykokw.com",
 
   vite: {
     plugins: [tailwindcss()],
+    optimizeDeps: {
+      exclude: ["@resvg/resvg-js"],
+    },
   },
 
   markdown: {
@@ -31,4 +36,6 @@ export default defineConfig({
       ],
     ],
   },
+
+  integrations: [react()],
 });

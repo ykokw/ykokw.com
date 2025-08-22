@@ -1,5 +1,4 @@
 ---
-import "@fontsource/biz-udgothic/files/biz-udgothic-latin-400-normal.woff2";
 import "@fontsource/biz-udgothic/400.css";
 import "../styles/global.css";
 import Header from "../components/Header.astro";
@@ -7,9 +6,13 @@ import Footer from "../components/Footer.astro";
 import BreadcrumbNavigation from "../components/BreadcrumbNavigation.astro";
 interface Props {
   breadcrumbs?: (string | { label: string; href: string })[];
+  ogpPath?: string;
 }
 
-const { breadcrumbs = [] } = Astro.props;
+const { breadcrumbs = [], ogpPath } = Astro.props;
+const ogpImageUrl = ogpPath
+  ? new URL(ogpPath, Astro.site)
+  : new URL("/images/ogp.png", Astro.site);
 const breadcrumbsText = breadcrumbs
   .map((crumb) => (typeof crumb === "string" ? crumb : crumb.label))
   .join(" / ");
@@ -21,7 +24,7 @@ const title = `Yuki Okawa (@ykokw) | ${breadcrumbsText.length > 0 ? breadcrumbsT
   <head prefix="og: https://ogp.me/ns/website#">
     <meta charset="UTF-8" />
     <meta name="description" content="Yuki Okawa's Home page" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -36,10 +39,7 @@ const title = `Yuki Okawa (@ykokw) | ${breadcrumbsText.length > 0 ? breadcrumbsT
     <meta property="og:title" content={title} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={Astro.site} />
-    <meta
-      property="og:image"
-      content={new URL("/images/ogp-dark.png", Astro.site)}
-    />
+    <meta property="og:image" content={ogpImageUrl} />
     <!-- Cloudflare Web Analytics -->
     <script
       defer
