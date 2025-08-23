@@ -1,212 +1,40 @@
 ---
-import Layout from "../layouts/Layout.astro";
 import TextLink from "../components/TextLink.astro";
+import PageLayout from "../layouts/PageLayout.astro";
+import { getLatestItems, getTopTags } from "../contents/index.ts";
+import ItemList from "../components/ItemList.astro";
 
-const profileLinks = [
-  { label: "GitHub", href: "https://github.com/ykokw" },
-  { label: "LAPRAS", href: "https://lapras.com/public/ykokw" },
-];
-
-const snsLinks = [
-  { label: "Bluesky", href: "https://bsky.app/profile/ykokw.com" },
-];
-
-const blogLinks = [
-  { label: "Zenn", href: "https://zenn.dev/ykokw" },
-  { label: "Qiita", href: "https://qiita.com/ykokw" },
-  { label: "しずかなインターネット", href: "https://sizu.me/ykokw" },
-];
-
-const articles = [
-  {
-    label: "PlaywrightとMSWを組み合わせる - Timee Product Team Blog",
-    href: "https://tech.timee.co.jp/entry/2024/12/21/000000",
-  },
-];
-
-const title = "Yuki Okawa (@ykokw)";
+const latestItems = await getLatestItems();
+const topTags = await getTopTags();
 ---
 
-<Layout title={title}>
-  <main>
-    <h1>{title}</h1>
-    <div class="content">
-      <p class="introduction">
-        <img src="/images/profile.jpg" alt="Yuki Okawaのプロフィール画像" />
-        Hi, I am Yuki Okawa.<br />
-        日本でフロントエンドエンジニアとして働いています。
-      </p>
-
-      <h2>Links</h2>
-      <h3>Profile</h3>
-      <ul class="links">
-        {
-          profileLinks.map((params, index) => (
-            <li>
-              <TextLink {...params} />
-              {index !== profileLinks.length - 1 && (
-                <span class="divider">/</span>
-              )}
-            </li>
-          ))
-        }
-      </ul>
-      <h3>SNS</h3>
-      <ul class="links">
-        {
-          snsLinks.map((params, index) => (
-            <li>
-              <TextLink {...params} />
-              {index !== snsLinks.length - 1 && <span class="divider">/</span>}
-            </li>
-          ))
-        }
-      </ul>
-      <h3>Tech Blog / Diary</h3>
-      <ul class="links">
-        {
-          blogLinks.map((params, index) => (
-            <li>
-              <TextLink {...params} />
-              {index !== blogLinks.length - 1 && <span class="divider">/</span>}
-            </li>
-          ))
-        }
-      </ul>
-      <h3>Articles</h3>
-      <ul class="articles">
-        {
-          articles.map((params) => (
-            <li>
-              <TextLink {...params} />
-            </li>
-          ))
-        }
-      </ul>
-      <h2>Mottos</h2>
-      <ul class="values">
-        <li>There is more than one way to do it.</li>
-        <li>ねだるな、勝ち取れ、さすれば与えられん</li>
-      </ul>
-    </div>
-    <footer>
-      <p class="footer">&copy; 2023 Yuki Okawa</p>
-    </footer>
-  </main>
-</Layout>
-
-<style>
-  @media (prefers-color-scheme: light) {
-    main {
-      color: #4d4d4d;
-      background: #f4f4f4;
+<PageLayout>
+  <section class="my-8">
+    <h2 class="text-blue-white mb-2 text-2xl">最近の記事</h2>
+    <ItemList items={latestItems} />
+    <p class="text-blue-white mt-4 text-sm">
+      <TextLink label="すべての記事を見る" href="/articles" />
+    </p>
+  </section>
+  <section class="my-8">
+    <h2 class="text-blue-white mb-2 text-2xl">記事のタグ割合</h2>
+    <p class="text-blue-white text-sm opacity-70">（Zennの記事は集計対象外）</p>
+    <ul class="list-inside list-disc">
+      {
+        topTags.map(([tag, percent]) => (
+          <li class="text-md text-blue-white mb-1">
+            {tag}: {percent} %
+          </li>
+        ))
+      }
+    </ul>
+    {
+      topTags.length === 0 && (
+        <p class="text-blue-white text-sm">タグがありません</p>
+      )
     }
-  }
-  @media (prefers-color-scheme: dark) {
-    main {
-      color: #d9d9d9;
-      background: #2d2d2d;
-    }
-  }
-  main {
-    transition:
-      background-color 0.5s ease,
-      color 0.5s ease;
-    flex-grow: 1;
-    flex-shrink: 0;
-    margin: 48px auto;
-    padding: 1rem;
-    max-width: 600px;
-    min-width: 300px;
-    display: flex;
-    padding: 16px;
-    flex-direction: column;
-    align-items: flex-start;
-    flex-grow: 1;
-    box-shadow: 4px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    border-radius: 8px;
-  }
-  @media screen and (max-width: 600px) {
-    main {
-      margin: 16px;
-    }
-  }
-  @media screen and (max-height: 600px) {
-    main {
-      margin: 16px;
-      max-width: 100%;
-    }
-  }
-  h1 {
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    margin: 0;
-  }
-  h2 {
-    margin: 36px 0 12px;
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-  h3 {
-    margin: 24px 0 4px;
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-  ul.links,
-  ul.articles {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    flex-wrap: wrap;
-  }
-  ul.values {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .divider {
-    padding: 0 4px;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-  .footer {
-    margin-top: 48px;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-  }
-  .content {
-    flex: 1;
-  }
-  p,
-  ul.values {
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.6;
-  }
-  p {
-    word-break: auto-phrase;
-  }
-  .introduction {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    gap: 8px;
-  }
-  .introduction img {
-    width: 80px;
-    height: 80px;
-    border-radius: 8px;
-  }
-</style>
+    <p class="text-blue-white mt-4 text-sm">
+      <TextLink label="すべてのタグを見る" href="/tags" />
+    </p>
+  </section>
+</PageLayout>

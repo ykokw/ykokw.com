@@ -1,0 +1,32 @@
+---
+import "@fontsource/biz-udgothic/files/biz-udgothic-latin-400-normal.woff2";
+import "@fontsource/biz-udgothic/400.css";
+import "../styles/global.css";
+import BaseLayout from "./BaseLayout.astro";
+interface Props {
+  id: string;
+  breadcrumbs?: (string | { label: string; href: string })[];
+}
+
+const { breadcrumbs = [], id } = Astro.props;
+---
+
+<BaseLayout breadcrumbs={breadcrumbs} ogpPath={`/api/${id}/ogp.png`}>
+  <article
+    class:list={[
+      "prose text-blue-white mb-8 max-w-full text-sm",
+      "prose-headings:text-blue-white prose-headings:mb-2 prose-headings:mt-4 prose-headings:font-normal",
+      "prose-h1:text-2xl prose-h1:mb-3",
+      "prose-h2:text-xl",
+      "prose-h3:text-lg",
+      "prose-p:mb-2 prose-p:mt-0 prose-p:whitespace-pre-wrap",
+      "prose-blockquote:text-blue-white prose-blockquote:opacity-70 prose-blockquote:*:before:content-[''] prose-blockquote:*:after:content-['']",
+      "prose-ol:marker:text-blue-white prose-ol:text-blue-white",
+      "prose-a:text-blue-white prose-a:hover:text-light-blue prose-a:underline prose-a:transition-colors duration-500 ease-in-out",
+      "prose-tr:border-dark-blue",
+      "prose-thead:border-dark-blue prose-thead:border-b-2",
+    ]}
+  >
+    <slot />
+  </article>
+</BaseLayout>

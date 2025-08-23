@@ -1,0 +1,54 @@
+---
+import { Image } from "astro:assets";
+import PageLayout from "../layouts/PageLayout.astro";
+import TextLink from "../components/TextLink.astro";
+
+const intro = `はじめまして！日本でフロントエンドエンジニアをしているYuki Okawa（@ykokw）です。
+私はReact、Next.jsを中心にUIの開発・運用を行っています。
+Vitest、Playwrightでの自動テスト整備・CI/CD環境整備にも取り組んでいます。`;
+---
+
+<PageLayout breadcrumbs={["About me"]}>
+  <section class="my-8 flex items-center gap-4">
+    <Image
+      src="/images/profile.jpg"
+      alt="Yuki Okawa's profile picture"
+      width={80}
+      height={80}
+      class="rounded-full"
+    />
+    <p class="text-blue-white text-sm whitespace-pre-wrap">{intro}</p>
+  </section>
+  <section class="my-8 flex flex-col gap-4">
+    <h2 class="text-blue-white mb-2 text-2xl">リンク</h2>
+    <ul class="text-sm">
+      <li>
+        <TextLink
+          label="GitHub"
+          href="https://github.com/ykokw"
+          target="_blank"
+          rel="noopener noreferrer"
+        />
+      </li>
+      <li>
+        <TextLink
+          label="Bluesky"
+          href="https://bsky.app/profile/ykokw.com"
+          target="_blank"
+          rel="noopener noreferrer"
+        />
+      </li>
+      <li>
+        <TextLink
+          label="しずかなインターネット"
+          href="https://github.com/ykokw"
+          target="_blank"
+          rel="noopener noreferrer"
+        />
+      </li>
+    </ul>
+    <p class="text-blue-white text-sm opacity-70">
+      （他にもXのアカウントなどありますがアクティブじゃないです）
+    </p>
+  </section>
+</PageLayout>

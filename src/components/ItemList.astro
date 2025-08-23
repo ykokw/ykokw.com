@@ -1,0 +1,31 @@
+---
+import TextLink from "./TextLink.astro";
+import { type CommonArticle } from "../contents/index.ts";
+import BlogInfo from "./BlogInfo.astro";
+
+interface Props {
+  items: CommonArticle[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul>
+  {
+    items.map((item) => (
+      <li class="text-md text-blue-white mb-2 flex flex-col">
+        <div class="flex flex-wrap items-center gap-x-2">
+          <TextLink
+            label={item.title}
+            href={item.url}
+            target={item.media !== "blog" ? "_blank" : undefined}
+          />
+          {item.media !== "blog" && (
+            <span class="text-sm opacity-70">({(item as any).media})</span>
+          )}
+        </div>
+        <BlogInfo publishedDate={item.publishedDate} tags={item.tags} />
+      </li>
+    ))
+  }
+</ul>

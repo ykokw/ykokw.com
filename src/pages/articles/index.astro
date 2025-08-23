@@ -1,0 +1,14 @@
+---
+import PageLayout from "../../layouts/PageLayout.astro";
+import { getAllItems } from "../../contents/index.ts";
+import ItemList from "../../components/ItemList.astro";
+
+const allItems = await getAllItems();
+---
+
+<PageLayout breadcrumbs={["すべての記事一覧"]}>
+  <section class="my-8">
+    <h2 class="text-blue-white mb-2 text-2xl">すべての記事</h2>
+    <ItemList items={allItems} />
+  </section>
+</PageLayout>

@@ -1,0 +1,17 @@
+---
+import "@fontsource/biz-udgothic/files/biz-udgothic-latin-400-normal.woff2";
+import "@fontsource/biz-udgothic/400.css";
+import "../styles/global.css";
+import BaseLayout from "./BaseLayout.astro";
+interface Props {
+  breadcrumbs?: (string | { label: string; href: string })[];
+}
+
+const { breadcrumbs = [] } = Astro.props;
+---
+
+<BaseLayout breadcrumbs={breadcrumbs}>
+  <main class="mb-8 max-w-full grow">
+    <slot />
+  </main>
+</BaseLayout>

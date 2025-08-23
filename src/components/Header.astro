@@ -1,0 +1,19 @@
+---
+import BreadcrumbNavigation from "./BreadcrumbNavigation.astro";
+import TextLink from "./TextLink.astro";
+
+interface Props {
+  breadcrumbs: (string | { label: string; href: string })[];
+}
+const { breadcrumbs = [] } = Astro.props;
+---
+
+<header
+  class="text-blue-white bg-midnight sticky top-0 z-50 flex w-full flex-wrap items-center justify-between gap-y-2 py-4"
+>
+  <h1>
+    <a href="/">Yuki Okawa (@ykokw)</a>
+  </h1>
+  <TextLink label="About me" href="/about" />
+  {breadcrumbs.length > 0 && <BreadcrumbNavigation breadcrumbs={breadcrumbs} />}
+</header>

@@ -1,0 +1,24 @@
+---
+import { getCollection, render } from "astro:content";
+import BlogLayout from "../../layouts/BlogLayout.astro";
+import BlogInfo from "../../components/BlogInfo.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+const { post } = Astro.props;
+const { Content } = await render(post);
+---
+
+<BlogLayout
+  breadcrumbs={[{ label: "ブログ", href: "/blog" }, post.data.title]}
+  id={post.id}
+>
+  <h1>{post.data.title}</h1>
+  <BlogInfo publishedDate={post.data.publishedDate} tags={post.data.tags} />
+  <Content />
+</BlogLayout>

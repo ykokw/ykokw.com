@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --color-midnight: #0a192f;
+  --color-blue-white: #e6f1ff;
+  --color-light-blue: #609ffb;
+  --color-dark-blue: #344e73;
+  --font-sans: "Verdana", "Biz UDGothic", system-ui;
+}
