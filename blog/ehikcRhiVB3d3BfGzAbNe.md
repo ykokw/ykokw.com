@@ -8,7 +8,7 @@ published: true
 
 ホームページをリニューアルした。
 
-技術構成は前から変わっていなかったがトップページに各リンクを乗せているだけだったので
+技術構成は前から変わっていなかったがトップページに各リンクをのせているだけだったので
 せっかくAstroを使っているのに色んな機能を活用できていなかった。
 
 ということで、今回のリニューアルで以下の機能を利用することができた。
@@ -21,7 +21,9 @@ published: true
 - [コンテンツコレクション | Docs](https://docs.astro.build/ja/guides/content-collections/ "コンテンツコレクション | Docs")
   - Markdownで書かれたブログ記事、Zennのフィード、その他記事のJSONファイルを集約できた
 - [シンタックスハイライト | Docs](https://docs.astro.build/ja/guides/syntax-highlighting/ "シンタックスハイライト | Docs")
+  - デフォルトのテーマがちょうど見やすいと思ったのでそのまま利用
 - [エンドポイント | Docs](https://docs.astro.build/ja/guides/endpoints/ "エンドポイント | Docs")
+  - ブログ記事ごとのタイトル入りOGP画像を生成するエンドポイントを実装
 
 Zenn / Qiita / このサイトの使い分けは特に決めてないけど、
 せっかくリニューアルしたので色々試したことをアウトプットしていきたい。
