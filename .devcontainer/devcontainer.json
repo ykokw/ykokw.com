@@ -9,10 +9,6 @@
       "ZSH_IN_DOCKER_VERSION": "1.2.0"
     }
   },
-  "features": {
-    "ghcr.io/devcontainers/features/git:1": {},
-    "ghcr.io/devcontainers/features/github-cli:1": {}
-  },
   "runArgs": ["--cap-add=NET_ADMIN", "--cap-add=NET_RAW"],
   "customizations": {
     "vscode": {
@@ -21,7 +17,12 @@
         "esbenp.prettier-vscode",
         "astro-build.astro-vscode",
         "bradlc.vscode-tailwindcss",
-        "ms-vscode.vscode-typescript-next"
+        "ms-vscode.vscode-typescript-next",
+        "anthropic.claude-code",
+        "redhat.vscode-yaml",
+        "yzhang.markdown-all-in-one",
+        "streetsidesoftware.code-spell-checker",
+        "yoavbls.pretty-ts-errors"
       ],
       "settings": {
         "editor.formatOnSave": true,
