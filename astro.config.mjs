@@ -41,7 +41,7 @@ export default defineConfig({
           },
           contentProperties: {
             className:
-              "material-symbols-outlined inline-flex align-middle text-sm! text-blue-white opacity-70 ml-1",
+              "font-material-symbols inline-flex align-middle text-sm! text-blue-white opacity-70 ml-1",
             "aria-label": "新しいタブで開く",
           },
         },
