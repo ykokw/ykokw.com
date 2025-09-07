@@ -7,6 +7,6 @@
   --color-blue-white: #e6f1ff;
   --color-light-blue: #609ffb;
   --color-dark-blue: #344e73;
-  --font-sans: "Verdana", "Biz UDGothic", system-ui;
   --font-material-symbols: "Material Symbols Outlined", sans-serif;
+  --font-sans: "Verdana", var(--font-biz-udgothic), system-ui;
 }

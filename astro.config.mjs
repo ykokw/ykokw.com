@@ -1,4 +1,4 @@
-import { defineConfig } from "astro/config";
+import { defineConfig, fontProviders } from "astro/config";
 import rehypeExternalLinks from "rehype-external-links";
 
 import tailwindcss from "@tailwindcss/vite";
@@ -8,6 +8,18 @@ import react from "@astrojs/react";
 // https://astro.build/config
 export default defineConfig({
   site: "https://ykokw.com",
+
+  experimental: {
+    fonts: [
+      {
+        provider: fontProviders.fontsource(),
+        name: "BIZ UDGothic",
+        cssVariable: "--font-biz-udgothic",
+        weights: ["400"],
+        subsets: ["japanese"],
+      },
+    ],
+  },
 
   vite: {
     plugins: [tailwindcss()],

@@ -1,6 +1,7 @@
 ---
-import "@fontsource/biz-udgothic/400.css";
+// import "@fontsource/biz-udgothic/400.css";
 import "../styles/global.css";
+import { Font } from "astro:assets";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 
@@ -22,6 +23,7 @@ const title = `Yuki Okawa (@ykokw) | ${breadcrumbsText.length > 0 ? breadcrumbsT
 <!doctype html>
 <html lang="ja" class="bg-midnight h-dvh h-screen font-sans">
   <head prefix="og: https://ogp.me/ns/website#">
+    <Font cssVariable="--font-biz-udgothic" preload />
     <meta charset="UTF-8" />
     <meta name="description" content="Yuki Okawa's Home page" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
