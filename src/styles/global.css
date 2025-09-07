@@ -1,4 +1,4 @@
-@import "@fontsource-variable/material-symbols-outlined/wght.css";
+@import "@fontsource/material-symbols-outlined/400.css";
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
@@ -8,6 +8,5 @@
   --color-light-blue: #609ffb;
   --color-dark-blue: #344e73;
   --font-sans: "Verdana", "Biz UDGothic", system-ui;
-  --font-material-symbols: "Material Symbols Outlined Variable", sans-serif;
-  --font-material-symbols---font-variation-settings: "wght" 400;
+  --font-material-symbols: "Material Symbols Outlined", sans-serif;
 }

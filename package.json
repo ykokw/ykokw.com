@@ -16,7 +16,6 @@
     "@ascorbic/feed-loader": "^2.0.1",
     "@astrojs/check": "^0.9.4",
     "@astrojs/react": "^4.3.0",
-    "@fontsource-variable/material-symbols-outlined": "^5.2.21",
     "@fontsource/biz-udgothic": "^5.1.0",
     "@fontsource/material-symbols-outlined": "^5.2.21",
     "@tailwindcss/vite": "^4.1.11",
