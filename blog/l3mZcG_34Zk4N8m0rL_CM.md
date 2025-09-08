@@ -3,24 +3,24 @@ title: "サイトのフォント設定をシンプルにした"
 tags: ["Font", "Performance"]
 publishedDate: "2025-09-08"
 lastEditedDate: "2025-09-08"
-published: false
+published: true
 ---
 
-# サイト構築時
+## サイト構築時
 
-最初は学習を兼ねてWebフォントを導入していた。
-具体的には[BIZ UDGothic - Google Fonts](https://fonts.google.com/specimen/BIZ+UDGothic)を使用していた。
-このフォントは見やすさと読みやすさが意識されたユニバーサルフォントで、実際に使ってみても非常に見やすかった。
+最初は学習を兼ねてWebフォント[BIZ UDGothic - Google Fonts](https://fonts.google.com/specimen/BIZ+UDGothic)を使用していた。
+このフォントは見やすさと読みやすさが意識されたユニバーサルフォントで、実際に使ってみても非常に見やすいと感じていた。
 また、unicode-rangeが指定されて分割されたフォントファイルがダウンロードされる仕組みになっていた。
 サイトには[Fontsource](https://fontsource.org/)を利用してnpmパッケージとして追加した。
 
 また、いくつかのMaterial Symbolsアイコンも使用していたため、そのCSSをドキュメント通りにBaseLayoutで読み込んでいた。
 
-# 適用しなかった改善
+## Webフォントを使わない判断に至るまで
 
 Material SymbolsもFontsourceから利用できることに気づいたので変更してみた。
 Chrome Dev ToolsのNetworkタブでデータ量を計測していたところ、
 Material SymbolsよりもBIZ UDGothicの方が断然データ量が多いことに気づいた。
+（日本語のフォントがデータ量大きいのは知ってたので今更感あったが...）
 この時点で、Webフォントの使用をやめることがパフォーマンス改善の近道だと感じ始めた。
 
 また途中で気付いたが、サイト構築時はMaterial Symbolsのアイコン名を具体的に指定していなかったため、全てのアイコンを含んだフォントファイルがダウンロードされていた。
@@ -29,7 +29,7 @@ Material SymbolsよりもBIZ UDGothicの方が断然データ量が多いこと�
 
 試行錯誤の一環として、Astroの[Experimental fonts API](https://docs.astro.build/en/reference/experimental-flags/fonts/#_top)も試してみた。手元での検証では、フォントのダウンロード回数は減ったものの、（1つの？）ファイルにまとまったことで逆にサイズが大きくなってしまった。これは設定ミスか、キャッシュ戦略に基づく最適化の結果かもしれないが、深く追求はしなかった。
 
-# 最終的な着地点
+## 最終的な着地点
 
 最終的に、システムフォントに頼る方針に変更した。[2025年に最適なfont-familyの書き方 - ICS MEDIA](https://ics.media/entry/200317/)の記事を参考に、以下のような設定にした。
 
@@ -63,7 +63,7 @@ export const iconNameSet = new Set(iconNames);
 export type IconName = (typeof iconNames)[number];
 ```
 
-(src/layouts/BaseLayout.astro)
+(src/layouts/BaseLayout.astro から抜粋)
 
 ```ts
 const iconNameParams = new URLSearchParams({
@@ -73,7 +73,7 @@ const iconNameParams = new URLSearchParams({
 });
 ```
 
-# さいごに
+## さいごに
 
 このサイトではWebフォントを利用しないこととしたが、
 Fontsourceを経由してnpmパッケージとしてフォントを管理できるのは便利だった。
