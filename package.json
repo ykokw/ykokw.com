@@ -16,7 +16,6 @@
     "@ascorbic/feed-loader": "^2.0.1",
     "@astrojs/check": "^0.9.4",
     "@astrojs/react": "^4.3.0",
-    "@fontsource/biz-udgothic": "^5.1.0",
     "@tailwindcss/vite": "^4.1.11",
     "@types/react": "^19.1.10",
     "@types/react-dom": "^19.1.7",
