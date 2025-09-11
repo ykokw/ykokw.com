@@ -1,0 +1,46 @@
+---
+title: "サイトの開発環境をClaude CodeをDev Containerで動作させる"
+tags: ["Claude Code", "Dev Container", "Astro"]
+publishedDate: "2025-09-11"
+lastEditedDate: "2025-09-11"
+published: true
+---
+
+## 2つあるDev ContainerへのClaude Code導入方法
+
+- [開発コンテナ - Anthropic](https://docs.anthropic.com/ja/docs/claude-code/devcontainer) を参照
+  - リポジトリからdevcontainer.jsonとDockerfile、init-firewall.shをコピーしてくる
+- [anthropics/devcontainer-features](https://github.com/anthropics/devcontainer-features) を使う
+  - node.jsがセットアップされたdevcontainer.jsonにfeatureとして追加するだけ
+
+使い分けをClaudeに聞いたら以下の通りだった。
+
+> devcontainer-featuresを選ぶべき場合：
+>
+> すでにプロジェクトでdevcontainerを使っている
+> シンプルにClaude Code CLIツールだけ追加したい
+> 既存の開発環境を大きく変更したくない
+>
+> claude-code/.devcontainerを選ぶべき場合：
+>
+> 新規プロジェクトでClaude Codeを中心に開発したい
+> ネットワーク設定など細かい制御が必要
+> Claude Codeのベストプラクティス設定をそのまま使いたい
+
+## Astroの開発サーバーを開くときは--hostをつける
+
+コンテナ内で起動した開発サーバーにアクセスしたいので--hostオプションが必要だった。
+オプションをつけて起動したうえで、ブラウザではlocalhostにアクセスする。
+
+## Claude Codeのログインを完了できない
+
+Dev Container環境でClaudeをスタートしたときの認証で、
+Web UI経由で認証しようとしたら、アプリ（Claude Code）の承認をしても処理が完了しなかった。
+
+承認後ローディングのままのURLをよく見たらlocalhostのランダムポートにリダイレクトしようとしていて、
+コンテナがそのポートをフォワーディングしていないのでアクセスできるはずがなかった。
+
+自動で開くURLではなく、Claude Codeに表示される `Browser didn't open? Use the url below to sign in:` のURLの方を開くと
+承認後にコードをClaude Codeに貼り付けてログイン完了とするフローになる。
+
+これに気づかないで時間を無駄にしてしまった...
