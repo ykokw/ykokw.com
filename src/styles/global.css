@@ -6,5 +6,7 @@
   --color-blue-white: #e6f1ff;
   --color-light-blue: #609ffb;
   --color-dark-blue: #344e73;
-  --font-sans: "Verdana", "Biz UDGothic", system-ui;
+  --font-default:
+    "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans",
+    Meiryo, sans-serif;
 }

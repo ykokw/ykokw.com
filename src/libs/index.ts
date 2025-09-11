@@ -6,8 +6,6 @@ let fontBizUdpgothic: ArrayBuffer | null = null;
 const URL_BIZ_UDPGOTHIC =
   "https://cdn.jsdelivr.net/fontsource/fonts/biz-udpgothic@latest/japanese-400-normal.ttf";
 
-// NOTE: BIZ UDPGothic をfontsourceから読み込む
-// fontBizUdpgothicにデータがあればそのまま使用する
 export const fetchFontBizUdpgothic = async () => {
   if (fontBizUdpgothic) {
     return fontBizUdpgothic;
@@ -23,7 +21,6 @@ export const fetchFontBizUdpgothic = async () => {
 
 let iconBase64: string;
 
-// NOTE: ローカルのアイコンをBase64エンコードして返す
 export const getIconBase64 = async () => {
   if (iconBase64) {
     return iconBase64;

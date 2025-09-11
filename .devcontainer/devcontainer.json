@@ -17,12 +17,8 @@
         "esbenp.prettier-vscode",
         "astro-build.astro-vscode",
         "bradlc.vscode-tailwindcss",
-        "ms-vscode.vscode-typescript-next",
-        "anthropic.claude-code",
-        "redhat.vscode-yaml",
-        "yzhang.markdown-all-in-one",
-        "streetsidesoftware.code-spell-checker",
-        "yoavbls.pretty-ts-errors"
+        "esbenp.prettier-vscode",
+        "anthropic.claude-code"
       ],
       "settings": {
         "editor.formatOnSave": true,
