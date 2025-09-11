@@ -17,7 +17,6 @@
         "esbenp.prettier-vscode",
         "astro-build.astro-vscode",
         "bradlc.vscode-tailwindcss",
-        "esbenp.prettier-vscode",
         "anthropic.claude-code"
       ],
       "settings": {
