@@ -30,3 +30,15 @@ export const getIconBase64 = async () => {
   iconBase64 = iconBuffer.toString("base64");
   return iconBase64;
 };
+
+const outdatedYear = 1
+export const isOutdated = (post: any): boolean => {
+  const now = new Date();
+  const lastEditDate = post.data.lastEditedDate
+    ? new Date(post.data.lastEditedDate)
+    : new Date(post.data.publishedDate);
+  const twoYearsAgo = new Date();
+  twoYearsAgo.setFullYear(now.getFullYear() - outdatedYear);
+
+  return lastEditDate < twoYearsAgo;
+}
