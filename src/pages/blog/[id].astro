@@ -11,8 +11,8 @@ export async function getStaticPaths() {
     props: { post },
   }));
 }
+
 const { post } = Astro.props;
-// post.data.lastEditedDateが1年以上前なのかを比較する
 const needOutdatedNotice = isOutdated(post);
 const { Content } = await render(post);
 ---
