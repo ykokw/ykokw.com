@@ -1,33 +1,11 @@
 import { getCollection, type CollectionEntry } from "astro:content";
+import type { WritingItem } from "./type";
+import { blogCollectionRepository, getAllBlogItems } from "./blog";
 
-export type CommonArticle = {
-  title: string;
-  publishedDate: string;
-  tags: string[];
-  url: string;
-  media: string;
-};
-
-let allBlogPosts: CollectionEntry<"blog">[] = [];
 let allExternalArticles: CollectionEntry<"articles">[] = [];
 let allZennPosts: CollectionEntry<"zenn">[] = [];
 
-export async function getAllBlogPosts(): Promise<CommonArticle[]> {
-  if (allBlogPosts.length === 0) {
-    allBlogPosts = await getCollection("blog", (item) => {
-      return import.meta.env.MODE === "production" ? item.data.published : true;
-    });
-  }
-  return allBlogPosts.map((post) => ({
-    title: post.data.title,
-    publishedDate: post.data.publishedDate,
-    tags: post.data.tags || [],
-    url: `/blog/${post.id}`,
-    media: "blog",
-  }));
-}
-
-export async function getAllExternalArticles(): Promise<CommonArticle[]> {
+export async function getAllExternalArticles(): Promise<WritingItem[]> {
   if (allExternalArticles.length === 0) {
     allExternalArticles = await getCollection("articles");
   }
@@ -40,7 +18,7 @@ export async function getAllExternalArticles(): Promise<CommonArticle[]> {
   }));
 }
 
-export async function getAllZennPosts(): Promise<CommonArticle[]> {
+export async function getAllZennPosts(): Promise<WritingItem[]> {
   if (allZennPosts.length === 0) {
     allZennPosts = await getCollection("zenn");
   }
@@ -53,15 +31,15 @@ export async function getAllZennPosts(): Promise<CommonArticle[]> {
   }));
 }
 
-export const getAllItems = async (): Promise<CommonArticle[]> => {
+export const getAllItems = async (): Promise<WritingItem[]> => {
   return [
-    ...(await getAllBlogPosts()),
+    ...(await getAllBlogItems(blogCollectionRepository)),
     ...(await getAllExternalArticles()),
     ...(await getAllZennPosts()),
   ].sort((a, b) => Date.parse(b.publishedDate) - Date.parse(a.publishedDate));
 };
 
-export const getLatestItems = async (): Promise<CommonArticle[]> => {
+export const getLatestItems = async (): Promise<WritingItem[]> => {
   const allItems = await getAllItems();
   return allItems
     .filter((item) => {
@@ -74,7 +52,7 @@ export const getLatestItems = async (): Promise<CommonArticle[]> => {
 };
 
 export const getAllTagUsages = async () => {
-  const blogItems = await getAllBlogPosts();
+  const blogItems = await getAllBlogItems(blogCollectionRepository);
   const articleItems = await getAllExternalArticles();
   const tagUsages = [...blogItems, ...articleItems].reduce((acc, item) => {
     if (item.tags) {
@@ -95,7 +73,7 @@ export const getTopTags = async () => {
   const sortedTags = Array.from(tagUsage.entries())
     .sort((a, b) => b[1] - a[1])
     .slice(0, 5) as [string, number][];
-  const blogItems = await getAllBlogPosts();
+  const blogItems = await getAllBlogItems(blogCollectionRepository);
   const articleItems = await getAllExternalArticles();
   const allItemsLength = [...blogItems, ...articleItems].length;
   return sortedTags.map(([tag, count]) => [
