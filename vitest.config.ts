@@ -7,7 +7,7 @@ export default getViteConfig({
       {
         extends: true,
         test: {
-          include: ['src/libs/*', 'src/contents/*'],
+          include: ['src/libs/**/*.test.ts', 'src/contents/**/*.test.ts'],
           environment: 'node',
         },
       },
