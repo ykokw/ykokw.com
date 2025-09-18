@@ -15,6 +15,9 @@
     "test:watch": "vitest --watch",
     "test:ui": "vitest --ui"
   },
+  "engines": {
+    "node": "22.19.0"
+  },
   "dependencies": {
     "@ascorbic/feed-loader": "^2.0.1",
     "@astrojs/check": "^0.9.4",
