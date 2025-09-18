@@ -12,5 +12,6 @@ export default getViteConfig({
         },
       },
     ],
+    reporters: process.env.CI ? 'dot' : 'default'
   },
 });
