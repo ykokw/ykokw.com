@@ -9,3 +9,41 @@ updates:
     directory: "/" # Location of package manifests
     schedule:
       interval: "weekly"
+    cooldown:
+      default-days: 5
+      semver-major-days: 3
+    groups:
+      astro:
+        patterns:
+          - "astro*"
+          - "@astrojs/*"
+      testing:
+        patterns:
+          - "vitest*"
+          - "@vitest/*"
+      react:
+        patterns:
+          - "react*"
+          - "@types/react*"
+      tailwind:
+        patterns:
+          - "tailwindcss*"
+          - "@tailwindcss/*"
+      prod-dependencies:
+        dependency-type: "production"
+        exclude-patterns:
+          - "astro*"
+          - "@astrojs/*"
+          - "vitest*"
+          - "@vitest/*"
+          - "tailwindcss*"
+          - "@tailwindcss/*"
+      dev-dependencies:
+        dependency-type: "development"
+        exclude-patterns:
+          - "astro*"
+          - "@astrojs/*"
+          - "vitest*"
+          - "@vitest/*"
+          - "tailwindcss*"
+          - "@tailwindcss/*"
