@@ -24,16 +24,8 @@ jobs:
         run: npm ci
 
       - name: Run tests
-        run: npm test -- --coverage --no-color > test-results.txt
+        run: npm test -- --coverage
 
-      - name: Format test results as Markdown
-        run: |
-          echo '```' > formatted-test-results.txt
-          cat test-results.txt >> formatted-test-results.txt
-          echo '```' >> formatted-test-results.txt
-
-      - name: Post test results to pull request
-        uses: marocchino/sticky-pull-request-comment@773744901bac0e8cbb5a0dc842800d45e9b2b405 # v2.9.4
+      - name: "Report Coverage"
         if: ${{ !cancelled() }}
-        with:
-          path: formatted-test-results.txt
+        uses: davelosert/vitest-coverage-report-action@8ab049ff5a2c6e78f78af446329379b318544a1a # v2.8.3
