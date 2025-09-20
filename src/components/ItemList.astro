@@ -1,10 +1,10 @@
 ---
 import TextLink from "./TextLink.astro";
-import { type CommonArticle } from "../contents/index.ts";
+import { type WritingItem } from "../contents/type";
 import BlogInfo from "./BlogInfo.astro";
 
 interface Props {
-  items: CommonArticle[];
+  items: WritingItem[];
 }
 
 const { items } = Astro.props;

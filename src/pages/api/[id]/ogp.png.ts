@@ -13,7 +13,7 @@ export const getStaticPaths = async () => {
   });
 };
 
-export const GET: APIRoute = async ({ params, request }) => {
+export const GET: APIRoute = async ({ params }) => {
   const { id } = params;
   if (!id) {
     return new Response(null, {
@@ -32,7 +32,7 @@ export const GET: APIRoute = async ({ params, request }) => {
 
   const png = await generateOgpImage(post.data.title);
 
-  return new Response(png, {
+  return new Response(new Uint8Array(png), {
     headers: {
       "Content-Type": "image/png",
     },
