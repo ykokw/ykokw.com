@@ -14,8 +14,8 @@ Astroのような静的サイトでは複雑なロジックは少ないものの
 
 ## Contents Collection APIのテスト実装
 
-AstroのContents Collection API (`getCollection`)関数を直接モックしたとき、TypeScriptエラーが解決できませんでした。
-モック定義を簡単にするため、Dependency Injectionパターンを導入しました。完全なDIフレームワークではなく、シンプルなRepositoryパターンとして実装しています。
+AstroのContents Collection API (`getCollection`)関数を直接モックしたとき、型定義に関するTypeScriptエラーが解決できませんでした。
+モック定義を効率化し、テストの可読性を向上させるため、Dependency Injectionパターンを導入しました。完全なDIフレームワークではなく、シンプルなRepositoryパターンとして実装しています。
 
 （全ての記事一覧を返すロジック）
 
@@ -85,7 +85,7 @@ it("should return WritingItem array with correct properties", async () => {
 
 Github Actionsで自動テストするワークフローも用意しました。
 [davelosert/vitest-coverage-report-action](https://github.com/davelosert/vitest-coverage-report-action) を利用してプルリクエストにカバレッジレポートをコメントしてもらっています。
-そんなにかっちり運用する予定はないので、threshold設定やmainブランチとの比較は行っていません。
+現段階では厳密な運用は予定していないため、threshold設定やmainブランチとの比較は行っていません。
 
 ## 今後
 
