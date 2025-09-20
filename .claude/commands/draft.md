@@ -1,0 +1,2 @@
+- Create a draft for a technical blog post from notes on unstaged files.
+- If there's any content you think should be added, please suggest it.
