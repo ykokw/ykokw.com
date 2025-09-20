@@ -1,0 +1,4 @@
+- Create a draft for a technical blog post from notes on unstaged files.
+  - Edit the target file with user confirmation
+  - If there's any content you think should be added, please suggest it.
+- If a file is specified as an argument, execute the processing even for staged files.

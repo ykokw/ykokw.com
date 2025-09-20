@@ -1,8 +1,8 @@
 ---
-title: "サイトの開発環境をClaude CodeをDev Containerで動作させる"
+title: "サイトの開発環境としてDev Containerを用意してClaude Codeを動作させる"
 tags: ["Claude Code", "Dev Container", "Astro"]
 publishedDate: "2025-09-11"
-lastEditedDate: "2025-09-11"
+lastEditedDate: "2025-09-20"
 published: true
 ---
 
