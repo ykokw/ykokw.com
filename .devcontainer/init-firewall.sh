@@ -70,6 +70,7 @@ for domain in \
     "sentry.io" \
     "statsig.anthropic.com" \
     "statsig.com" \
+    "cdn.jsdelivr.net" \
     "zenn.dev"; do
     echo "Resolving $domain..."
     ips=$(dig +noall +answer A "$domain" | awk '$4 == "A" {print $5}')
