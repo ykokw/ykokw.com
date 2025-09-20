@@ -1,0 +1,5 @@
+- Proofread the unstaged files in the blog directory
+  - Identify and point out inconsistencies in writing style and typos
+    - Edit these improve points
+  - Include frontmatter data in the proofreading process and verify that titles and tags are appropriate
+- If a file is specified as an argument, execute the processing even for staged files
