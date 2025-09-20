@@ -3,6 +3,7 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
+    "check": "astro check",
     "dev": "astro dev",
     "dev:host": "astro dev --host",
     "start": "astro dev",
@@ -13,8 +14,7 @@
     "add:post": "node scripts/add-post.js",
     "test": "vitest",
     "test:watch": "vitest --watch",
-    "test:ui": "vitest --ui",
-    "typecheck": "astro check"
+    "test:ui": "vitest --ui"
   },
   "engines": {
     "node": "22.19.0"
