@@ -6,7 +6,7 @@ import ItemList from "../../components/ItemList.astro";
 export async function getStaticPaths() {
   const tagUsages = await getAllTagUsages();
   return Array.from(tagUsages.entries()).map(([tag]) => ({
-    params: { slug: tag },
+    params: { slug: encodeURIComponent(tag) },
   }));
 }
 
@@ -15,7 +15,7 @@ const { slug = "" } = Astro.params;
 // URLデコード
 const decodedSlug = decodeURIComponent(slug);
 const filteredItems = allItems.filter((item) =>
-  item.tags?.includes(decodedSlug),
+  item.tags?.includes(decodedSlug)
 );
 ---
 
@@ -27,7 +27,7 @@ const filteredItems = allItems.filter((item) =>
 >
   <section class="my-8">
     <h2 class="text-blue-white mb-2 text-2xl">
-      "#{slug}" タグがついた記事一覧
+      "#{decodedSlug}" タグがついた記事一覧
     </h2>
     <ItemList items={filteredItems} />
   </section>
