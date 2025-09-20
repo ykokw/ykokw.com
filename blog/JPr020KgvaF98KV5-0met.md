@@ -1,21 +1,21 @@
 ---
-title: "Vitest導入した"
-tags: []
+title: "Vitestを導入した"
+tags: ["Astro", "Vitest", "Testing", "CI/CD"]
 publishedDate: "2025-09-20"
 lastEditedDate: "2025-09-20"
 published: true
 ---
 
-## 導入理由
+## はじめに
 
-- AstroのStatic Siteで複雑なことはない
-- とはいえ、このあとdependabotの運用をしたかったのでCIでの自動テストを構築しておきたかった
-- Contents CollectionのAPIを呼び出しているロジックのテスト追加から始めた
+このサイトに、Vitestによるテスト環境を導入しました。
+Astroのような静的サイトでは複雑なロジックは少ないものの、
+今後のdependabot運用やCI/CD環境の整備を見据えて、自動テストの基盤を構築することにしました。
 
-## 記事一覧取得ロジックのテスト
+## Contents Collection APIのテスト実装
 
-- AstroのAPIをモックするときのTypeScriptエラーが解決できなかったのでDIを導入した
-  - （repositoryという命名以外は適当にやっている）
+AstroのContents Collection API (`getCollection`)関数を直接モックしたとき、TypeScriptエラーが解決できませんでした。
+モック定義を簡単にするため、Dependency Injectionパターンを導入しました。完全なDIフレームワークではなく、シンプルなRepositoryパターンとして実装しています。
 
 （全ての記事一覧を返すロジック）
 
@@ -83,4 +83,12 @@ it("should return WritingItem array with correct properties", async () => {
 
 ## カバレッジレポートのコメント投稿
 
-- TBA
+Github Actionsで自動テストするワークフローも用意しました。
+[davelosert/vitest-coverage-report-action](https://github.com/davelosert/vitest-coverage-report-action) を利用してプルリクエストにカバレッジレポートをコメントしてもらっています。
+そんなにかっちり運用する予定はないので、threshold設定やmainブランチとの比較は行っていません。
+
+## 今後
+
+Astroのコンポーネントテストや他のロジックも自動テストを書いていこうと思います。
+また、Playwrightを使ったE2Eテストも整備していきたいです。
+（Staticなサイトでどこまでやるか問題はありますが...）
