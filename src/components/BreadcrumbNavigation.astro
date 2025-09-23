@@ -5,13 +5,13 @@ interface Props {
 const { breadcrumbs = [] } = Astro.props;
 ---
 
-<p class="text-light-blue flex w-full grow items-center">
+<p class="text-light-blue w-full grow">
   {
     breadcrumbs.length > 0 &&
       breadcrumbs.map((breadcrumb) => {
         if (typeof breadcrumb === "object" && breadcrumb.href) {
           return (
-            <span class="inline-flex items-center">
+            <span class="inline">
               <span>/</span>
               <a
                 class="px-1 transition-all ease-in-out hover:underline"
@@ -23,7 +23,7 @@ const { breadcrumbs = [] } = Astro.props;
           );
         } else if (typeof breadcrumb === "string") {
           return (
-            <span class="inline-flex items-center">
+            <span class="inline">
               <span>/</span>
               <span class="px-1">{breadcrumb}</span>
             </span>
