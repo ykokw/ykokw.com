@@ -25,11 +25,11 @@ export default defineConfig({
           rel: "noreferrer",
           content: {
             type: "raw",
-            value: `<img src="${openInNewIcon}" width="16" height="16" alt="">`,
+            value: `<img src="${openInNewIcon}" width="16" height="16" alt="" class="not-prose m-0">`,
           },
           contentProperties: {
             className:
-              "material-symbols-outlined inline-flex align-middle text-sm! text-blue-white opacity-70 ml-1",
+              "inline-flex align-middle text-sm! text-blue-white opacity-70 ml-1",
             "aria-label": "新しいタブで開く",
           },
         },
