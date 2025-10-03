@@ -1,4 +1,5 @@
 ---
+import openInNewIcon from "../assets/icons/open-in-new.svg?url";
 interface Props {
   label: string;
   href: string;
@@ -22,12 +23,7 @@ const { href, label, target, rel } = Astro.props;
         aria-label="open link in new tab"
         class="text-blue-white opacity-70"
       >
-        <span
-          class="material-symbols-outlined inline-flex align-middle text-base!"
-          aria-hidden="true"
-        >
-          open_in_new
-        </span>
+        <img src={openInNewIcon} width="16" height="16" class="inline" />
       </span>
     )
   }
