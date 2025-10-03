@@ -2,7 +2,6 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
-import { iconNameSet } from "../constants/iconName";
 
 interface Props {
   breadcrumbs?: (string | { label: string; href: string })[];
@@ -17,12 +16,6 @@ const breadcrumbsText = breadcrumbs
   .map((crumb) => (typeof crumb === "string" ? crumb : crumb.label))
   .join(" / ");
 const title = `Yuki Okawa (@ykokw) | ${breadcrumbsText.length > 0 ? breadcrumbsText : "Home"}`;
-
-const iconNameParams = new URLSearchParams({
-  family: "Material Symbols Outlined",
-  icon_names: Array.from(iconNameSet).join(","),
-  display: "block",
-});
 ---
 
 <!doctype html>
@@ -32,10 +25,6 @@ const iconNameParams = new URLSearchParams({
     <meta name="description" content="Yuki Okawa's Home page" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link
-      href={`https://fonts.googleapis.com/css2?${iconNameParams.toString()}`}
-      rel="stylesheet"
-    />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta property="og:title" content={title} />
