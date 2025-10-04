@@ -23,7 +23,12 @@ const { href, label, target, rel } = Astro.props;
         aria-label="open link in new tab"
         class="text-blue-white opacity-70"
       >
-        <OpenInNewIcon width="16" height="16" class="not-prose inline" />
+        <OpenInNewIcon
+          width="16"
+          height="16"
+          class="not-prose inline"
+          aria-hidden
+        />
       </span>
     )
   }
