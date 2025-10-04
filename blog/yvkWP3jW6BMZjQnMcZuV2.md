@@ -30,7 +30,11 @@ FontsourceのMaterial Symbolsパッケージを検討している際に、気に
 </span>
 ```
 
-Astroではv5.7からSVGファイルを通常のコンポーネントとしてレンダリングできるようになったため、インポートしたSVGファイルをそのまま使用しています。[tailwindcss-typography](https://github.com/tailwindlabs/tailwindcss-typography)の影響を避け、余計なマージンが設定されないよう`inline`指定を追加しています。
+Astroではv5.7からSVGファイルを通常のコンポーネントとしてレンダリングできるようになったため、インポートしたSVGファイルをそのまま使用しています。
+
+[Images | Docs](https://docs.astro.build/en/guides/images/#svg-components)
+
+アイコンサイズ指定と、[tailwindcss-typography](https://github.com/tailwindlabs/tailwindcss-typography)の影響を避け、余計なマージンが設定されないよう`inline`指定をclassとして追加しています。
 
 ```jsx
 <CalendarTodayIcon
