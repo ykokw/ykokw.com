@@ -1,6 +1,6 @@
 ---
 title: "アイコンをSVGファイルで運用していくことにした"
-tags: ["Icon", "SVG", "Material Symbols", "Web Performance"]
+tags: ["Icons", "SVG", "Material Symbols", "Web Performance", "Astro"]
 publishedDate: "2025-10-04"
 lastEditedDate: "2025-10-04"
 published: true
@@ -10,105 +10,54 @@ published: true
 
 このブログでは以前からMaterial Symbolsのアイコンフォントを使用していました。[フォント設定を最適化した際](/l3mZcG_34Zk4N8m0rL_CM)に、必要なアイコンだけを選択的に読み込むよう改善していましたが、さらなるパフォーマンス向上を目指してSVGファイルでの運用に切り替えることにしました。
 
-## 変更のきっかけ
+## SVGファイル運用のきっかけ
 
 FontsourceのMaterial Symbolsパッケージを検討している際に、気になるIssueを発見しました。
 
-https://github.com/fontsource/fontsource/issues/497#issuecomment-1705761024
+（[Font Request: Material Symbols](https://github.com/fontsource/fontsource/issues/497#issuecomment-1705761024) より引用）
 
-このIssueで議論されている内容を踏まえ、自分のブログの使用状況を振り返ってみました：
+> Using SVGs to individually pick out the necessary icons will always lead to smaller bundles, especially if it's only a couple of icons.
 
-- 使用しているアイコンは数個程度
-- フォント全体を読み込むにはオーバーヘッドが大きい
-- SVGでの運用により、バンドルサイズとページ初期表示を改善できる可能性
+このサイトでも利用しているアイコンが数種類と少なく、さらにページ読み込み時にアイコンが遅れて表示されることが気になっていたため、SVGファイルでの運用に切り替えることにしました。
 
-これらの理由から、SVGファイルでの運用に切り替えることを決めました。
+## 変更内容
 
-## 実装の変更点
-
-### Before: Material Symbolsフォント
-
-```css
-/* フォントファミリーの読み込み */
-@import url('https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined');
-
-.material-symbols-outlined {
-  font-family: 'Material Symbols Outlined';
-  font-weight: normal;
-  font-style: normal;
-  font-size: 24px;
-  line-height: 1;
-  letter-spacing: normal;
-  text-transform: none;
-  display: inline-block;
-  white-space: nowrap;
-  word-wrap: normal;
-  direction: ltr;
-}
-```
+変更前の実装は[マテリアル シンボルガイド](https://developers.google.com/fonts/docs/material_symbols?hl=ja#use_in_web)の通り、以下のようになっていました。
 
 ```html
-<!-- アイコンの使用 -->
-<span class="material-symbols-outlined">open_in_new</span>
+<span class="material-symbols-outlined text-base!" aria-hidden="true">
+  calendar_today
+</span>
 ```
 
-### After: SVGファイル
+Astroではv5.7からSVGファイルを通常のコンポーネントとしてレンダリングできるようになったため、インポートしたSVGファイルをそのまま使用しています。[tailwindcss-typography](https://github.com/tailwindlabs/tailwindcss-typography)の影響を避け、余計なマージンが設定されないよう`inline`指定を追加しています。
 
-各アイコンを個別のSVGファイルとして保存し、必要な箇所でインポートして使用するように変更しました。
-
-```tsx
-// アイコンコンポーネントとして実装
-import OpenInNewIcon from '../assets/icons/open-in-new.svg';
-
-<OpenInNewIcon className="w-4 h-4" />
+```jsx
+<CalendarTodayIcon
+  width="16"
+  height="16"
+  class="not-prose inline"
+  aria-hidden
+/>
 ```
-
-## パフォーマンスの改善効果
-
-### 初期表示の改善
-
-最も体感できる改善点は、初期表示時のアイコン表示タイミングです。
-
-**以前（フォント使用時）：**
-- ページ読み込み後、フォントファイルのダウンロードを待つ
-- フォント読み込み完了までアイコンが表示されない、または代替文字が表示される
-- アイコンが遅れて表示され、レイアウトシフトが発生する可能性
-
-**現在（SVG使用時）：**
-- HTMLと同時にアイコンが表示される
-- フォント読み込み待機時間の排除
-- レイアウトシフトの解消
-
-### バンドルサイズの最適化
-
-フォント全体ではなく、使用する個別のSVGファイルのみがバンドルに含まれるため、不要なデータの読み込みを削減できました。
-
-## 課題と今後の改善点
-
-### 測定の不備
-
-今回の変更では、バンドルサイズやCore Web Vitalsの詳細な測定を事前・事後で行うことを忘れてしまいました。今後同様の最適化を行う際は、以下を測定する必要があります：
-
-- バンドルサイズの変化
-- First Contentful Paint (FCP)
-- Largest Contentful Paint (LCP)
-- Cumulative Layout Shift (CLS)
-
-### アイコン管理の複雑化
-
-SVGファイル個別管理により、以下の課題が生じる可能性があります：
-
-- アイコンファイルの個別管理が必要
-- 新しいアイコン追加時の手順が増加
-- 一貫性のあるスタイリングの維持
 
 ## まとめ
 
-少数のアイコンしか使用しない場合、SVGファイルでの運用はフォントアイコンよりも効率的であることが分かりました。特に初期表示パフォーマンスの改善は体感できるレベルでした。
+ページ読み込み時のアイコン表示遅延は解決できました。
+（バンドルサイズやCore Web Vitalsの比較測定は実施しませんでした。）
 
-ただし、次回同様の最適化を行う際は、定量的な測定も忘れずに行い、改善効果をより明確に把握したいと思います。
+少数のアイコンを利用する場合はこの方法で十分だと思います。
+大規模なWebアプリケーションで多くのアイコンが必要な場合は、別ツールの利用を検討するか、Material Symbolsを直接利用しつつページ読み込み時用のフォールバック表示（サイズ固定、文字非表示など）が必要かもしれません。
 
-### 使い分けの指針
+個人的には、必要なファイルが決まっている場合、運用負荷が許容範囲であればSVGファイル運用で統一するのが良いと考えています。
 
-- **SVGが適している場合：** 使用アイコン数が少ない、パフォーマンスを重視する
-- **フォントアイコンが適している場合：** 多数のアイコンを使用、動的にアイコンを変更する必要がある
+## （余談）iconify
+
+調査中に[Iconify](https://iconify.design/)というOSSを発見しました。さまざまなフレームワークをサポートしており便利そうです。
+APIを利用してアイコンを読み込む仕組みが特徴的だと感じていましたが、
+
+（[iconify/iconify](https://github.com/iconify/iconify) のREADMEより引用）
+
+> You can also use API if you don't know what icons user will need, while offering thousands of icons to choose from. This is perfect for applications that can be customised by user.
+
+という記述を見て、ユーザーが表示アイコンを選択できるようなユースケースでは、確かにオンデマンド読み込みが適していると感じました。
