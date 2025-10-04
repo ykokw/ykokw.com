@@ -1,6 +1,6 @@
 ---
-import calendarTodayIcon from "../assets/icons/calendar-today.svg?url";
-import tagIcon from "../assets/icons/tag.svg?url";
+import CalendarTodayIcon from "../assets/icons/calendar-today.svg";
+import TagIcon from "../assets/icons/tag.svg";
 
 interface Props {
   publishedDate: string;
@@ -11,13 +11,13 @@ const { publishedDate, tags } = Astro.props;
 
 <div class="flex flex-wrap items-center gap-x-4 gap-y-0 opacity-70">
   <span class="flex items-center gap-0.5 text-sm" aria-label="published date:">
-    <img src={calendarTodayIcon} width="16" height="16" class="not-prose" />
+    <CalendarTodayIcon width="16" height="16" class="not-prose inline" />
     {publishedDate}
   </span>
   {
     tags && tags.length > 0 && (
       <span class="flex items-center gap-0.5 text-sm" aria-label="tags:">
-        <img src={tagIcon} width="16" height="16" class="not-prose" />
+        <TagIcon width="16" height="16" class="not-pros inline" />
         {tags?.map((tag) => `${tag}`).join(", ")}
       </span>
     )
