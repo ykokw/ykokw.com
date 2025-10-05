@@ -1,11 +1,12 @@
 ---
 import TextLink from "../components/TextLink.astro";
 import PageLayout from "../layouts/PageLayout.astro";
-import { getLatestItems, getTopTags } from "../contents/index.ts";
+import { getLatestItems, getTopTagsLastYear } from "../contents/index.ts";
 import ItemList from "../components/ItemList.astro";
+import HorizontalBarChart from "../components/HorizontalBarChart.astro";
 
 const latestItems = await getLatestItems();
-const topTags = await getTopTags();
+const topTagsLastYear = await getTopTagsLastYear();
 ---
 
 <PageLayout>
@@ -17,22 +18,13 @@ const topTags = await getTopTags();
     </p>
   </section>
   <section class="my-8">
-    <h2 class="text-blue-white mb-2 text-2xl">記事のタグ割合</h2>
-    <p class="text-blue-white text-sm opacity-70">（Zennの記事は集計対象外）</p>
-    <ul class="list-inside list-disc">
-      {
-        topTags.map(([tag, percent]) => (
-          <li class="text-md text-blue-white mb-1">
-            {tag}: {percent} %
-          </li>
-        ))
-      }
-    </ul>
-    {
-      topTags.length === 0 && (
-        <p class="text-blue-white text-sm">タグがありません</p>
-      )
-    }
+    <h2 class="text-blue-white mb-2 text-2xl">タグ別の記事数Top5</h2>
+    <p class="text-blue-white text-sm opacity-70">
+      直近1年で公開した記事で集計（Zennの記事は集計対象外）
+    </p>
+    <div class="my-4">
+      <HorizontalBarChart data={topTagsLastYear} client:load />
+    </div>
     <p class="text-blue-white mt-4 text-sm">
       <TextLink label="すべてのタグを見る" href="/tags" />
     </p>

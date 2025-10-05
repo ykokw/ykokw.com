@@ -1,0 +1,39 @@
+---
+interface Props {
+  data: [string, number][];
+}
+
+const { data } = Astro.props;
+
+const maxCount = data.length > 0 ? Math.max(...data.map(([, count]) => count)) : 0;
+---
+
+{
+  data.length === 0 ? (
+    <p class="text-blue-white text-sm">タグがありません</p>
+  ) : (
+    <div class="w-full">
+      <div class="grid gap-2 items-center [grid-template-columns:auto_1fr_auto]">
+        {
+          data.map(([tag, count]) => (
+            <>
+              <a
+                href={`/tags/${tag}`}
+                class="text-blue-white hover:text-light-blue text-right text-xs underline underline-offset-4 transition-colors duration-500 ease-in-out sm:text-sm"
+              >
+                {tag}
+              </a>
+              <div class="relative h-4 self-center">
+                <div
+                  class="bg-light-blue h-full rounded transition-all"
+                  style={{ width: `${(count / maxCount) * 100}%` }}
+                />
+              </div>
+              <div class="text-blue-white text-xs sm:text-sm">{count}</div>
+            </>
+          ))
+        }
+      </div>
+    </div>
+  )
+}
