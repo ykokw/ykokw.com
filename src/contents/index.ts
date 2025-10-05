@@ -40,7 +40,7 @@ export const getAllTagUsages = async () => {
   );
 };
 
-export const getTopTags = async () => {
+export const getTopTags = async (): Promise<[string, number][]> => {
   const tagUsage = await getAllTagUsages();
   const sortedTags = Array.from(tagUsage.entries())
     .sort((a, b) => b[1] - a[1])
@@ -48,8 +48,32 @@ export const getTopTags = async () => {
   const blogItems = await getAllBlogItems(blogCollectionRepository);
   const articleItems = await getAllArticleItems(articlesCollectionRepository);
   const allItemsLength = [...blogItems, ...articleItems].length;
-  return sortedTags.map(([tag, count]) => [
+  return sortedTags.map(([tag, count]): [string, number] => [
     tag,
     Math.trunc((count / allItemsLength) * 100),
   ]);
+};
+
+export const getTopTagsLastYear = async (): Promise<[string, number][]> => {
+  const blogItems = await getAllBlogItems(blogCollectionRepository);
+  const oneYearAgo = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000);
+
+  const recentBlogItems = blogItems.filter((item) => {
+    const publishedDate = new Date(item.publishedDate);
+    return publishedDate >= oneYearAgo;
+  });
+
+  const tagUsages = recentBlogItems.reduce((acc, item) => {
+    if (item.tags) {
+      item.tags.map((tag: string) => {
+        acc.set(tag, (acc.get(tag) || 0) + 1);
+      });
+    }
+    return acc;
+  }, new Map<string, number>());
+
+  return Array.from(tagUsages.entries())
+    .sort((a, b) => b[1] - a[1])
+    .sort((a, b) =>  a[0].localeCompare(b[0]))
+    .slice(0, 5) as [string, number][];
 };
