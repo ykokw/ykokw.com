@@ -40,20 +40,6 @@ export const getAllTagUsages = async () => {
   );
 };
 
-export const getTopTags = async (): Promise<[string, number][]> => {
-  const tagUsage = await getAllTagUsages();
-  const sortedTags = Array.from(tagUsage.entries())
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 5) as [string, number][];
-  const blogItems = await getAllBlogItems(blogCollectionRepository);
-  const articleItems = await getAllArticleItems(articlesCollectionRepository);
-  const allItemsLength = [...blogItems, ...articleItems].length;
-  return sortedTags.map(([tag, count]): [string, number] => [
-    tag,
-    Math.trunc((count / allItemsLength) * 100),
-  ]);
-};
-
 export const getTopTagsLastYear = async (): Promise<[string, number][]> => {
   const blogItems = await getAllBlogItems(blogCollectionRepository);
   const articleItems = await getAllArticleItems(articlesCollectionRepository);
