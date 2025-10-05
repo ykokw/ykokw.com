@@ -60,7 +60,7 @@ export const getTopTagsLastYear = async (): Promise<[string, number][]> => {
   }, new Map<string, number>());
 
   return Array.from(tagUsages.entries())
+    .sort((a, b) => a[0].localeCompare(b[0]))
     .sort((a, b) => b[1] - a[1])
-    .sort((a, b) =>  a[0].localeCompare(b[0]))
     .slice(0, 5) as [string, number][];
 };
