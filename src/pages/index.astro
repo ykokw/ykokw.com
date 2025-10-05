@@ -3,7 +3,7 @@ import TextLink from "../components/TextLink.astro";
 import PageLayout from "../layouts/PageLayout.astro";
 import { getLatestItems, getTopTagsLastYear } from "../contents/index.ts";
 import ItemList from "../components/ItemList.astro";
-import HorizontalBarChart from "../components/HorizontalBarChart.tsx";
+import HorizontalBarChart from "../components/HorizontalBarChart.astro";
 
 const latestItems = await getLatestItems();
 const topTagsLastYear = await getTopTagsLastYear();
