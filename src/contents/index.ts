@@ -56,9 +56,10 @@ export const getTopTags = async (): Promise<[string, number][]> => {
 
 export const getTopTagsLastYear = async (): Promise<[string, number][]> => {
   const blogItems = await getAllBlogItems(blogCollectionRepository);
+  const articleItems = await getAllArticleItems(articlesCollectionRepository);
   const oneYearAgo = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000);
 
-  const recentBlogItems = blogItems.filter((item) => {
+  const recentBlogItems = [...blogItems, ...articleItems].filter((item) => {
     const publishedDate = new Date(item.publishedDate);
     return publishedDate >= oneYearAgo;
   });
