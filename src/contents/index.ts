@@ -2,6 +2,7 @@ import type { WritingItem } from "./type";
 import { blogCollectionRepository, getAllBlogItems } from "./blog";
 import { articlesCollectionRepository, getAllArticleItems } from "./articles";
 import { zennCollectionRepository, getAllZennItems } from "./zenn";
+import { countTagUsage } from "./tags";
 
 export const getAllItems = async (): Promise<WritingItem[]> => {
   return [
@@ -26,21 +27,10 @@ export const getLatestItems = async (): Promise<WritingItem[]> => {
 export const getAllTagUsages = async () => {
   const blogItems = await getAllBlogItems(blogCollectionRepository);
   const articleItems = await getAllArticleItems(articlesCollectionRepository);
-  const tagUsages = [...blogItems, ...articleItems].reduce((acc, item) => {
-    if (item.tags) {
-      item.tags.map((tag: string) => {
-        acc.set(tag, (acc.get(tag) || 0) + 1);
-      });
-    }
-    return acc;
-  }, new Map<string, number>());
-
-  return new Map(
-    [...tagUsages.entries()].sort(([a], [b]) => a.localeCompare(b)),
-  );
+  return countTagUsage({ items: [...blogItems, ...articleItems] });
 };
 
-export const getTopTagsLastYear = async (): Promise<[string, number][]> => {
+export const getTopTagsLastYear = async () => {
   const blogItems = await getAllBlogItems(blogCollectionRepository);
   const articleItems = await getAllArticleItems(articlesCollectionRepository);
   const oneYearAgo = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000);
@@ -50,17 +40,5 @@ export const getTopTagsLastYear = async (): Promise<[string, number][]> => {
     return publishedDate >= oneYearAgo;
   });
 
-  const tagUsages = recentBlogItems.reduce((acc, item) => {
-    if (item.tags) {
-      item.tags.map((tag: string) => {
-        acc.set(tag, (acc.get(tag) || 0) + 1);
-      });
-    }
-    return acc;
-  }, new Map<string, number>());
-
-  return Array.from(tagUsages.entries())
-    .sort((a, b) => a[0].localeCompare(b[0]))
-    .sort((a, b) => b[1] - a[1])
-    .slice(0, 5) as [string, number][];
+  return countTagUsage({ items: recentBlogItems, limit: 5 })
 };
