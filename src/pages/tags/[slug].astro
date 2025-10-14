@@ -5,14 +5,13 @@ import ItemList from "../../components/ItemList.astro";
 
 export async function getStaticPaths() {
   const tagUsages = await getAllTagUsages();
-  return Array.from(tagUsages.entries()).map(([tag]) => ({
-    params: { slug: encodeURIComponent(tag) },
+  return Array.from(tagUsages.entries()).map(([encodedTag]) => ({
+    params: { slug: decodeURI(encodedTag) },
   }));
 }
 
 const allItems = await getAllItems();
 const { slug = "" } = Astro.params;
-// URLデコード
 const decodedSlug = decodeURIComponent(slug);
 const filteredItems = allItems.filter((item) =>
   item.tags?.includes(decodedSlug)
