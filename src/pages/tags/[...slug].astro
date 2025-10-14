@@ -12,7 +12,7 @@ export async function getStaticPaths() {
 
 const allItems = await getAllItems();
 const { slug = "" } = Astro.params;
-const decodedSlug = decodeURIComponent(slug);
+const decodedSlug = decodeURI(slug);
 const filteredItems = allItems.filter((item) =>
   item.tags?.includes(decodedSlug)
 );

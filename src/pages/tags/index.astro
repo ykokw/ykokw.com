@@ -14,7 +14,7 @@ const allTags = await getAllTagUsages();
         Array.from(allTags.entries()).map(([tag, usage]) => (
           <li class="text-md text-blue-white mb-1">
             <TextLink
-              label={`${decodeURIComponent(tag)} (${usage})`}
+              label={`${decodeURI(tag)} (${usage})`}
               href={`/tags/${tag}`}
             />
           </li>

@@ -21,7 +21,7 @@ const maxCount =
               href={`/tags/${tag}`}
               class="text-blue-white hover:text-light-blue text-right text-xs underline underline-offset-4 transition-colors duration-500 ease-in-out sm:text-sm"
             >
-              {decodeURIComponent(tag)}
+              {decodeURI(tag)}
             </a>
             <div class="relative h-4 self-center">
               <div

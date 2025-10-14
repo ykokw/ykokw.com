@@ -11,7 +11,7 @@ export const countTagUsage = ({
   const tagCountMap = items.reduce((map, item) => {
     if (item.tags && Array.isArray(item.tags)) {
       item.tags.forEach((tag) => {
-        const encodedTag = encodeURIComponent(tag);
+        const encodedTag = encodeURI(tag);
         map.set(encodedTag, (map.get(encodedTag) || 0) + 1);
       });
     }

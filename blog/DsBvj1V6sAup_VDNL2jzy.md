@@ -18,7 +18,7 @@ Astroの動的ルーティング `[slug].astro` では、URLパスパラメー�
 
 ### 1. タグの利用回数集計ロジックでのエンコード
 
-まず、タグの利用回数集計ロジックでタグ文字列を`encodeURIComponent()` でエンコードした。
+まず、タグの利用回数集計ロジックでタグ文字列を`encodeURI()` でエンコードした。
 
 ```ts
 export const countTagUsage = ({
@@ -32,7 +32,7 @@ export const countTagUsage = ({
   const tagCountMap = items.reduce((map, item) => {
     if (item.tags && Array.isArray(item.tags)) {
       item.tags.forEach((tag) => {
-        const encodedTag = encodeURIComponent(tag);
+        const encodedTag = encodeURI(tag);
         map.set(encodedTag, (map.get(encodedTag) || 0) + 1);
       });
     }
@@ -63,12 +63,12 @@ export const countTagUsage = ({
 export async function getStaticPaths() {
   const tagUsages = await getAllTagUsages();
   return Array.from(tagUsages.entries()).map(([tag]) => ({
-    params: { slug: decodeURIComponent(tag) },
+    params: { slug: decodeURI(tag) },
   }));
 }
 ```
 
-この実装では `getStaticPaths()` で `decodeURIComponent()` を使用していたのを、
+この実装では `getStaticPaths()` で `decodeURI()` を使用していたのを、
 `decodeURI()` に変更することで改善した。
 
 **修正後の実装（動作する）：**
@@ -83,7 +83,7 @@ export async function getStaticPaths() {
 
 const { slug = "" } = Astro.params;
 // タグの表示用
-const decodedSlug = decodeURIComponent(slug);
+const decodedSlug = decodeURI(slug);
 ```
 
 ## まとめ
