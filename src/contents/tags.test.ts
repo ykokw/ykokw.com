@@ -220,6 +220,16 @@ describe("countTagUsage", () => {
           { tag: "API%20design%2FREST", count: 1 },
         ],
       },
+            {
+        description: "tags with plus sign",
+        tags: ["Vite+", "C++"],
+        secondItemTags: ["C++"],
+        expectedResults: [
+          
+          { tag: "C%2B%2B", count: 2 },
+          { tag: "Vite%2B", count: 1 },
+        ],
+      },
     ])(
       "should handle $description",
       ({ tags, secondItemTags, expectedResults }) => {
@@ -241,6 +251,7 @@ describe("countTagUsage", () => {
         ];
 
         const result = countTagUsage({ items });
+        console.log(result)
 
         expect(result.size).toBe(expectedResults.length);
         expectedResults.forEach(({ tag, count }) => {
