@@ -6,7 +6,8 @@ import ItemList from "../components/ItemList.astro";
 import HorizontalBarChart from "../components/HorizontalBarChart.astro";
 
 const latestItems = await getLatestItems();
-const topTagsLastYear = await getTopTagsLastYear();
+const topTagsLastYearMap = await getTopTagsLastYear();
+const topTagsLastYear = Array.from(topTagsLastYearMap.entries());
 ---
 
 <PageLayout>
