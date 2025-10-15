@@ -31,9 +31,9 @@ describe("countTagUsage", () => {
 
       const result = countTagUsage({ items });
 
-      expect(result.get("javascript")).toBe(2);
-      expect(result.get("typescript")).toBe(2);
-      expect(result.get("react")).toBe(2);
+      expect(result.get("javascript")).toEqual({ label: "javascript", count: 2 });
+      expect(result.get("typescript")).toEqual({ label: "typescript", count: 2 });
+      expect(result.get("react")).toEqual({ label: "react", count: 2 });
       expect(result.size).toBe(3);
     });
 
@@ -50,8 +50,8 @@ describe("countTagUsage", () => {
 
       const result = countTagUsage({ items });
 
-      expect(result.get("javascript")).toBe(2);
-      expect(result.get("typescript")).toBe(1);
+      expect(result.get("javascript")).toEqual({ label: "javascript", count: 2 });
+      expect(result.get("typescript")).toEqual({ label: "typescript", count: 1 });
     });
   });
 
@@ -76,7 +76,7 @@ describe("countTagUsage", () => {
 
       const result = countTagUsage({ items });
 
-      expect(result.get("javascript")).toBe(1);
+      expect(result.get("javascript")).toEqual({ label: "javascript", count: 1 });
       expect(result.size).toBe(1);
     });
 
@@ -118,8 +118,8 @@ describe("countTagUsage", () => {
       const result = countTagUsage({ items, limit: 2 });
 
       expect(result.size).toBe(2);
-      expect(result.get("javascript")).toBe(3);
-      expect(result.get("typescript")).toBe(2);
+      expect(result.get("javascript")).toEqual({ label: "javascript", count: 3 });
+      expect(result.get("typescript")).toEqual({ label: "typescript", count: 2 });
       expect(result.has("react")).toBe(false);
     });
 
@@ -153,11 +153,11 @@ describe("countTagUsage", () => {
 
       // Verify the order: "c" (3), "b" (2), "a" (1)
       expect(entries[0][0]).toBe("c");
-      expect(entries[0][1]).toBe(3);
+      expect(entries[0][1]).toEqual({ label: "c", count: 3 });
       expect(entries[1][0]).toBe("b");
-      expect(entries[1][1]).toBe(2);
+      expect(entries[1][1]).toEqual({ label: "b", count: 2 });
       expect(entries[2][0]).toBe("a");
-      expect(entries[2][1]).toBe(1);
+      expect(entries[2][1]).toEqual({ label: "a", count: 1 });
     });
 
     it.each([
@@ -195,9 +195,9 @@ describe("countTagUsage", () => {
         tags: ["web development", "machine learning", "web development"],
         secondItemTags: ["machine learning", "data science"],
         expectedResults: [
-          { tag: "web%20development", count: 2 },
-          { tag: "machine%20learning", count: 2 },
-          { tag: "data%20science", count: 1 },
+          { tag: "web-development", label: "web development", count: 2 },
+          { tag: "machine-learning", label: "machine learning", count: 2 },
+          { tag: "data-science", label: "data science", count: 1 },
         ],
       },
       {
@@ -205,9 +205,9 @@ describe("countTagUsage", () => {
         tags: ["react/hooks", "node.js/express", "react/hooks"],
         secondItemTags: ["react/hooks", "vue/composition-api"],
         expectedResults: [
-          { tag: "react%2Fhooks", count: 3 },
-          { tag: "node.js%2Fexpress", count: 1 },
-          { tag: "vue%2Fcomposition-api", count: 1 },
+          { tag: "reacthooks", label: "react/hooks", count: 3 },
+          { tag: "nodejsexpress", label: "node.js/express", count: 1 },
+          { tag: "vuecomposition-api", label: "vue/composition-api", count: 1 },
         ],
       },
       {
@@ -215,19 +215,18 @@ describe("countTagUsage", () => {
         tags: ["web development/frontend", "CI/CD pipelines"],
         secondItemTags: ["web development/frontend", "API design/REST"],
         expectedResults: [
-          { tag: "web%20development%2Ffrontend", count: 2 },
-          { tag: "CI%2FCD%20pipelines", count: 1 },
-          { tag: "API%20design%2FREST", count: 1 },
+          { tag: "web-developmentfrontend", label: "web development/frontend", count: 2 },
+          { tag: "cicd-pipelines", label: "CI/CD pipelines", count: 1 },
+          { tag: "api-designrest", label: "API design/REST", count: 1 },
         ],
       },
-            {
+      {
         description: "tags with plus sign",
         tags: ["Vite+", "C++"],
         secondItemTags: ["C++"],
         expectedResults: [
-          
-          { tag: "C%2B%2B", count: 2 },
-          { tag: "Vite%2B", count: 1 },
+          { tag: "c", label: "C++", count: 2 },
+          { tag: "vite", label: "Vite+", count: 1 },
         ],
       },
     ])(
@@ -251,11 +250,10 @@ describe("countTagUsage", () => {
         ];
 
         const result = countTagUsage({ items });
-        console.log(result)
 
         expect(result.size).toBe(expectedResults.length);
-        expectedResults.forEach(({ tag, count }) => {
-          expect(result.get(tag)).toBe(count);
+        expectedResults.forEach(({ tag, label, count }) => {
+          expect(result.get(tag)).toEqual({ label, count });
         });
       },
     );
