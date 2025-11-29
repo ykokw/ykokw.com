@@ -1,0 +1,36 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm run :*)",
+      // Git read-only commands
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git status:*)",
+      "Bash(git show:*)",
+      "Bash(git branch:*)",
+      "Bash(git remote:*)",
+      "Bash(git rev-parse:*)",
+      "Bash(git blame:*)",
+      "Bash(git tag:*)",
+      "Bash(git reflog:*)",
+      "Bash(git grep:*)"
+    ],
+    // see also: https://github.com/anthropics/claude-code/issues/5892
+    "deny": [
+      "Bash(echo*)",
+      "Bash(tee*)",
+      "Bash(cat >*)",
+      "Bash(rm*)",
+      "Bash(mv*)",
+      "Bash(curl*)",
+      "Bash(wget*)"
+    ],
+    "ask": []
+  },
+  "sandbox": {
+    "enabled": true,
+    "autoAllowBashIfSandboxed": false,
+    "excludedCommands": ["pnpm"],
+    "allowUnsandboxedCommands": false
+  }
+}
