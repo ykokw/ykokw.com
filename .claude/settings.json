@@ -16,21 +16,11 @@
       "Bash(git tag:*)",
       "Bash(git reflog:*)",
       "Bash(git grep:*)"
-    ],
-    "deny": [
-      "Bash(echo:*)",
-      "Bash(ls:*)",
-      "Bash(tee:*)",
-      "Bash(cat:*)",
-      "Bash(rm:*)",
-      "Bash(mv:*)",
-      "Bash(curl:*)",
-      "Bash(wget:*)"
     ]
   },
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": false,
-    "excludedCommands": ["pnpm", "git"]
+    "allowUnsandboxedCommands": false
   }
 }
