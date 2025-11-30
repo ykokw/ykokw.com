@@ -36,5 +36,5 @@
     "--pids-limit=100",
     "--tmpfs=/tmp:rw,noexec,nosuid"
   ],
-  "remoteUser": "vscode"
+  "remoteUser": "node"
 }
