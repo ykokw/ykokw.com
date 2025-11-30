@@ -1,6 +1,6 @@
 {
   "name": "ykokw.com Dev Container",
-  "image": "mcr.microsoft.com/devcontainers/base:debian",
+  "image": "mcr.microsoft.com/devcontainers/base:bookworm",
   "customizations": {
     "vscode": {
       "extensions": [
