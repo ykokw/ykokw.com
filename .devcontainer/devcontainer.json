@@ -27,7 +27,8 @@
   "containerEnv": {
     "NODE_OPTIONS": "--max-old-space-size=4096"
   },
-  "postCreateCommand": "corepack enable pnpm && pnpm install",
+  "onCreateCommand": "corepack enable pnpm",
+  "postCreateCommand": "pnpm install",
   "forwardPorts": [4321],
   "runArgs": [
     "--security-opt=no-new-privileges:true",
