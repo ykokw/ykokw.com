@@ -1,6 +1,6 @@
 {
   "name": "ykokw.com Dev Container",
-  "image": "mcr.microsoft.com/devcontainers/base:debian",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:24",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -24,16 +24,10 @@
       }
     }
   },
-  "features": {
-    "ghcr.io/devcontainers/features/node:1": {
-      "version": "24.11.1",
-      "pnpmVersion": "10.24"
-    }
-  },
   "containerEnv": {
     "NODE_OPTIONS": "--max-old-space-size=4096"
   },
-  "postCreateCommand": "pnpm install",
+  "postCreateCommand": "corepack enable pnpm && pnpm install",
   "forwardPorts": [4321],
   "runArgs": [
     "--security-opt=no-new-privileges:true",
