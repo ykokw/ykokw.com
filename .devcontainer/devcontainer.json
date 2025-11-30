@@ -30,7 +30,6 @@
       "pnpmVersion": "10.24"
     }
   },
-  "remoteUser": "node",
   "containerEnv": {
     "NODE_OPTIONS": "--max-old-space-size=4096"
   },
