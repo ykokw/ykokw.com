@@ -46,7 +46,7 @@ The site uses Astro's content collections defined in `src/content.config.ts`:
 - **Styling**: Tailwind CSS 4
 - **Testing**: Vitest with coverage reporting
 - **Content**: Markdown processing with rehype plugins for external links
-- **Node Version**: 22.19.0 (specified in package.json)
+- **Node Version**: 24 (specified in package.json)
 
 ### Testing
 
