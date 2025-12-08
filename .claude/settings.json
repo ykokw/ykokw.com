@@ -1,26 +1,61 @@
 {
   "permissions": {
     "allow": [
+      "Bash(pnpm install)",
       "Bash(pnpm check)",
       "Bash(pnpm dev)",
       "Bash(pnpm build)",
-      "Bash(pnpm test)",
-      "Bash(git diff:*)",
-      "Bash(git log:*)",
-      "Bash(git status:*)",
-      "Bash(git show:*)",
-      "Bash(git branch:*)",
-      "Bash(git remote:*)",
-      "Bash(git rev-parse:*)",
-      "Bash(git blame:*)",
-      "Bash(git tag:*)",
-      "Bash(git reflog:*)",
-      "Bash(git grep:*)"
-    ]
+      "Bash(pnpm test)"
+    ],
+    "deny": [
+      "Bash(echo:*)",
+      "Bash(tee:*)",
+      "Bash(cat:*)",
+      "Bash(rm:*)",
+      "Bash(mv:*)",
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "Bash(cp:*)",
+      "Bash(sed:*)",
+      "Bash(awk:*)",
+      "Bash(vi:*)",
+      "Bash(vim:*)",
+      "Bash(nano:*)",
+      "Bash(emacs:*)",
+      "Bash(chmod:*)",
+      "Bash(chown:*)",
+      "Bash(sudo:*)",
+      "Bash(su:*)",
+      "Bash(ssh:*)",
+      "Bash(scp:*)",
+      "Bash(rsync:*)",
+      "Bash(nc:*)",
+      "Bash(netcat:*)",
+      "Bash(ifconfig:*)",
+      "Bash(ip:*)",
+      "Bash(env:*)",
+      "Bash(printenv:*)",
+      "Bash(export:*)",
+      "Bash(git config --global:*)",
+      "Bash(tar:*)",
+      "Bash(zip:*)",
+      "Bash(unzip:*)",
+      "Bash(gzip:*)",
+      "Bash(gunzip:*)",
+      "Bash(bzip2:*)",
+      "Bash(bunzip2:*)",
+      "Bash(7z:*)",
+      "Bash(dd:*)",
+      "Bash(ln:*)",
+      "Bash(shred:*)",
+      "Bash(truncate:*)"
+    ],
+    "disableBypassPermissionsMode": "disable"
   },
   "sandbox": {
     "enabled": true,
     "autoAllowBashIfSandboxed": false,
-    "allowUnsandboxedCommands": false
+    "allowUnsandboxedCommands": false,
+    "excludedCommands": ["pnpm install"]
   }
 }
