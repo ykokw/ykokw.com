@@ -11,11 +11,12 @@ published: true
 - Dev Containersを用意しようと考えた
   - Claude Code用のドキュメントをみかけて気になった
     - 参考: [Development containers](https://code.claude.com/docs/en/Dev Containers)
+    - やってみたログ: [サイトの開発環境としてDev Containerを用意してClaude Codeを動作させる](https://ykokw.com/blog/wwwhquosqatwp2exvjbdk/)
   - サプライチェーン攻撃の影響を小さくするのにDev Containersが有効そうと思った
     - 参考: [サプライチェーン攻撃への防御策](https://blog.jxck.io/entries/2025-09-20/mitigate-risk-of-oss-dependencies.html)
 - 設定で紆余曲折した
-  - Claude Codeのお手本は利用せずにdevcontainer.jsonを用意した
-  - いったんは普段使いせずにGithub Codespacesを利用する場合などに利用しようと考えた
+  - ネットワーク制限が微妙な挙動になったのでClaude Codeのお手本は利用せずにdevcontainer.jsonを用意してみた
+  - pnpmと相性がよくなさそうなのでDev Containers設定削除した
 
 ## Claude Code用のDev Containers
 
@@ -43,32 +44,6 @@ published: true
 - enableWeakerNestedSandboxがコンテナ環境用として設定可能になっている
   - プロセス分離をコンテナに委譲してBubblewrap（Linuxでサンドボックス環境を設定するツール..?）の--procオプション指定が省かれそうだった
   - [該当コード](https://github.com/anthropic-experimental/sandbox-runtime/blob/826ed320b411816feea11659594568585cca58fe/src/sandbox/linux-sandbox-utils.ts#L787)
-
-## Dev Containersの構成
-
-### 基本機能のインストール
-
-- `mcr.microsoft.com/devcontainers/base:bookworm` をベースイメージに
-- `ghcr.io/devcontainers/features/node` featureでNode.jsとpnpmをインストール
-
-### リソース制限とセキュリティ
-
-Dev Containersに以下の制限を設定:
-
-```json
-"runArgs": [
-  "--security-opt=no-new-privileges:true",
-  "--cpus=2",
-  "--memory=4g",
-  "--pids-limit=100",
-  "--tmpfs=/tmp:rw,noexec,nosuid"
-]
-```
-
-- `--security-opt=no-new-privileges:true`: 権限昇格を防止
-- `--cpus=2`, `--memory=4g`: ホストマシンのリソースを保護
-- `--pids-limit=100`: プロセス数制限でフォーク爆弾を防ぐ
-- `--tmpfs=/tmp:rw,noexec,nosuid`: 一時ファイル領域をセキュア化
 
 ## npm → pnpm への移行
 
