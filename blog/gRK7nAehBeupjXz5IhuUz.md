@@ -1,6 +1,6 @@
 ---
 title: "Dev Containersの雑記"
-tags: ["pnpm", "Dev Container", "Claude Code"]
+tags: ["pnpm", "Dev Containers", "Claude Code"]
 publishedDate: "2025-12-12"
 lastEditedDate: "2025-12-12"
 published: true
@@ -15,7 +15,7 @@ published: true
     - 参考: [サプライチェーン攻撃への防御策](https://blog.jxck.io/entries/2025-09-20/mitigate-risk-of-oss-dependencies.html)
 - 設定で紆余曲折した
   - Claude Codeのお手本は利用せずにdevcontainer.jsonを用意した
-  - いったん普段使いせずにGithub Codespacesを利用する場合などに利用しようと考えた
+  - いったんは普段使いせずにGithub Codespacesを利用する場合などに利用しようと考えた
 
 ## Claude Code用のDev Containers
 
@@ -87,7 +87,7 @@ Dev Containersに以下の制限を設定:
   - https://pnpm.io/ja/docker
   - store のパスを固定化（ボリュームのパスを指定）するとファイルコピーになってしまいpnpmのメリットがなくなってしまう
     - https://pnpm.io/ja/faq#does-pnpm-work-across-different-subvolumes-in-one-btrfs-partition
-- node_modulesをボリュームマウントしてディスクパフォーマンスを改善しようとしたときも、モジュールがココピーされてしまう
+- node_modulesをボリュームマウントしてディスクパフォーマンスを改善しようとしたときも、モジュールがコピーされてしまう
   - https://code.visualstudio.com/remote/advancedcontainers/improve-performance#_use-a-targeted-named-volume
 - 現状の最善策はReopen in containerの代わりにClone Repository in volumeしてもらうことになりそう
   - https://stackoverflow.com/questions/77099690/how-do-i-make-pnpm-work-as-intended-in-a-vscode-dev-container?utm_source=chatgpt.com
