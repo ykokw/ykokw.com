@@ -1,12 +1,12 @@
 ---
-title: "サイトの開発環境としてDev Containerを用意してClaude Codeを動作させる"
-tags: ["Claude Code", "Dev Container", "Astro"]
+title: "サイトの開発環境としてDev Containersを用意してClaude Codeを動作させる"
+tags: ["Claude Code", "Dev Containers", "Astro"]
 publishedDate: "2025-09-11"
-lastEditedDate: "2025-09-20"
+lastEditedDate: "2025-12-12"
 published: true
 ---
 
-## 2つあるDev ContainerへのClaude Code導入方法
+## 2つあるDev ContainersへのClaude Code導入方法
 
 - [開発コンテナ - Anthropic](https://docs.anthropic.com/ja/docs/claude-code/devcontainer) を参照
   - リポジトリからdevcontainer.jsonとDockerfile、init-firewall.shをコピーしてくる
@@ -44,7 +44,7 @@ published: true
 
 ## Claude Codeのログインを完了できない
 
-Dev Container環境でClaudeをスタートしたときの認証で、
+Dev Containers環境でClaudeをスタートしたときの認証で、
 Web UI経由で認証しようとしたら、アプリ（Claude Code）の承認をしても処理が完了しなかった。
 
 承認後ローディングのままのURLをよく見たらlocalhostのランダムポートにリダイレクトしようとしていて、
