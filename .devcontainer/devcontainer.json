@@ -38,8 +38,8 @@
   "forwardPorts": [4321],
   "runArgs": [
     "--security-opt=no-new-privileges:true",
-    "--cpus=2",
-    "--memory=4g",
+    "--cpus=4",
+    "--memory=8g",
     "--pids-limit=100",
     "--tmpfs=/tmp:rw,noexec,nosuid"
   ]
