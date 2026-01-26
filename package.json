@@ -39,10 +39,10 @@
     "@tailwindcss/typography": "^0.5.16",
     "@vitest/coverage-v8": "^4.0.12",
     "nanoid": "^5.1.5",
-    "prettier": "3.7.4",
+    "prettier": "3.8.0",
     "prettier-plugin-astro": "0.14.1",
     "prettier-plugin-tailwindcss": "0.7.0",
-    "satori": "^0.18.2",
+    "satori": "^0.19.1",
     "vitest": "^4.0.12"
   }
 }
