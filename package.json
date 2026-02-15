@@ -23,7 +23,7 @@
     "@ascorbic/feed-loader": "^2.0.1",
     "@astrojs/check": "^0.9.4",
     "@astrojs/react": "^4.4.0",
-    "@tailwindcss/vite": "^4.1.11",
+    "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "astro": "^5.16.4",
