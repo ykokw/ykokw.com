@@ -34,6 +34,11 @@
     "typescript": "^5.9.2"
   },
   "packageManager": "pnpm@10.24.0",
+  "pnpm": {
+    "overrides": {
+      "tar": "^7.5.7"
+    }
+  },
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/typography": "^0.5.16",
