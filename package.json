@@ -23,7 +23,7 @@
     "@ascorbic/feed-loader": "^2.0.1",
     "@astrojs/check": "^0.9.4",
     "@astrojs/react": "^4.4.0",
-    "@tailwindcss/vite": "^4.1.11",
+    "@tailwindcss/vite": "^4.1.18",
     "@types/react": "^19.2.2",
     "@types/react-dom": "^19.2.2",
     "astro": "^5.16.4",
@@ -34,11 +34,6 @@
     "typescript": "^5.9.2"
   },
   "packageManager": "pnpm@10.24.0",
-  "pnpm": {
-    "overrides": {
-      "tar": "^7.5.7"
-    }
-  },
   "devDependencies": {
     "@resvg/resvg-js": "^2.6.2",
     "@tailwindcss/typography": "^0.5.16",
