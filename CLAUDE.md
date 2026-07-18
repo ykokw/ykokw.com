@@ -4,19 +4,22 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-This is a personal website built with Astro 5 for ykokw.com. The site aggregates content from multiple sources including local blog posts, external articles, and Zenn feed.
+This is a personal website built with Astro 6 for ykokw.com. The site aggregates content from multiple sources including local blog posts, external articles, and Zenn feed.
 
 ## Development Commands
 
-- `npm run dev` - Start development server
-- `npm run dev:host` - Start development server with host access
-- `npm run build` - Type check with `astro check` and build the site
-- `npm run preview` - Preview the built site
-- `npm run format` - Format code with Prettier
-- `npm run add:post` - Create a new blog post using the script
-- `npm test` - Run tests with Vitest
-- `npm run test:watch` - Run tests in watch mode
-- `npm run test:ui` - Run tests with UI
+Use pnpm, not npm (`packageManager: pnpm@10.24.0`; CI also uses pnpm).
+
+- `pnpm dev` - Start development server
+- `pnpm dev:host` - Start development server with host access
+- `pnpm check` - Type check with `astro check`
+- `pnpm build` - Type check with `astro check` and build the site
+- `pnpm preview` - Preview the built site
+- `pnpm format` - Format code with Prettier
+- `pnpm add:post` - Create a new blog post using the script
+- `pnpm test` - Run tests with Vitest
+- `pnpm test:watch` - Run tests in watch mode
+- `pnpm test:ui` - Run tests with UI
 
 ## Architecture
 
@@ -42,7 +45,7 @@ The site uses Astro's content collections defined in `src/content.config.ts`:
 
 ### Tech Stack
 
-- **Framework**: Astro 5 with React integration
+- **Framework**: Astro 6 with React integration
 - **Styling**: Tailwind CSS 4
 - **Testing**: Vitest with coverage reporting
 - **Content**: Markdown processing with rehype plugins for external links
